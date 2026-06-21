@@ -1,0 +1,58 @@
+{
+  "common": {
+    "app_name": "Investment Tracker",
+    "language": "Language",
+    "language_en": "Change language to English",
+    "language_ar": "Change language to Arabic",
+    "switch_to_light": "Switch to dark mode",
+    "switch_to_dark":  "Switch to light mode",
+    "filter": "Filter",
+    "not_found": "Not found",
+    "search": "Search",
+    "record": "Record",
+    "user_snap": "User Snap",
+    "back": "Back"
+  },
+  "dashboard": {
+    "totalValue": "Total Value",
+    "totalGain": "Total Gain",
+    "topHoldings": "Top holdings",
+    "total_capital_sa": "Total Capital (SAR)",
+    "total_gained_sa": "Total Gained (SAR)",
+    "total_capital_ye": "Total Capital (YER)",
+    "total_gained_ye": "Total Gained (YER)"
+   },
+  "investment": {
+    "info": "Information",
+    "status": "Status",
+    "pending": "Pending",
+    "inbound": "Inbound",
+    "blocked": "Blocked",
+    "amount": "Amount",
+    "amount_ye": "Amount (YER)",
+    "amount_sa": "Amount (SAR)",
+    "note": "Note",
+    "title": "Title",
+    "date": "Date",
+    "roi": "ROI",
+    "in_progress": "In Progress",
+    "inactive": "Inactive",
+    "match_capital": "Match Capital",
+    "profitable": "Profitable",
+    "add_return": "Add Return",
+    "add_capital": "Add Capital",
+    "overview": "Overview",
+    "capitals": "Capitals",
+    "returns": "Returns",
+    "total_invested": "Total Invested",
+    "total_returned": "Total Returned",
+
+    "overview_stats": {
+      "start_date": "Start Date",
+      "last_injection_date": "Last Injection Date",
+      "expected_return": "Expected Return",
+      "last_return_date": "Last Return Date",
+      "last_return_amount": "Last Return Amount"
+    }
+  }
+}

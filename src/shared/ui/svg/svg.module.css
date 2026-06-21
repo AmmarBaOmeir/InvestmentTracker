@@ -1,0 +1,18 @@
+.span {
+  display: inline-block;
+  width: var(--svg-size);
+  height: var(--svg-size);
+  background-color: var(--svg-color);
+
+  /* Webkit Prefix for Chrome/Safari/Edge */
+  -webkit-mask-image: var(--svg-url);
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+
+  /* Standard for Firefox/Others */
+  mask-image: var(--svg-url);
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}

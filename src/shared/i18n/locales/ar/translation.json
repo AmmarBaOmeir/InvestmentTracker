@@ -1,0 +1,58 @@
+{
+  "common": {
+    "app_name": "مراقب الاستثمار",
+    "language": "اللغة",
+    "language_en": "تغيير اللغة إلى الإنجليزية",
+    "language_ar": "تغيير اللغة إلى العربية",
+    "switch_to_light": "التحويل إلى الوضع الليلي",
+    "switch_to_dark":  "التحويل إلى الوضع الشارق",
+    "filter": "تصفية",
+    "not_found": "غير موجود",
+    "search": "بحث",
+    "record": "سجل",
+    "user_snap": "المستخدم",
+    "back": "رجوع"
+  },
+  "dashboard": {
+    "totalValue": "القيمة الإجمالية",
+    "totalGain": "إجمالي الربح",
+    "topHoldings": "أبرز الحيازات",
+    "total_capital_sa": "إجمالي رأس المال (ريال سعودي)",
+    "total_gained_sa": "إجمالي العائدات (ريال سعودي)",
+    "total_capital_ye": "إجمالي رأس المال (ريال يمني)",
+    "total_gained_ye": "إجمالي العائدات (ريال يمني)"
+  },
+
+  "investment": {
+    "info": "المعلومات",
+    "status": "الحالة",
+    "pending": "قيد الانتظار",
+    "inbound": "وارد",
+    "blocked": "محظور",
+    "amount": "المبلغ",
+    "amount_ye": "المبلغ (ريال يمني)",
+    "amount_sa": "المبلغ (ريال سعودي)",
+    "note": "ملاحظة",
+    "title": "العنوان",
+    "date": "التاريخ",
+    "roi": "عائد الاستثمار",
+    "in_progress": "قيد المعالجة",
+    "inactive": "غير نشط",
+    "match_capital": "استرداد رأس المال",
+    "profitable": "مربح",
+    "add_return": "إضافة عائد",
+    "add_capital": "إضافة رأس مال",
+    "overview": "نظرة عامة",
+    "capitals": "رأس المال",
+    "returns": "العوائد",
+    "total_invested": "إجمالي رأس المال",
+    "total_returned": "إجمالي العائدات",
+      "overview_stats": {
+      "start_date": "تاريخ البدء",
+      "last_injection_date": "تاريخ آخر ضخ",
+      "expected_return": "العائد المتوقع",
+      "last_return_date": "تاريخ آخر عائد",
+      "last_return_amount": "مبلغ آخر عائد"
+    }
+  }
+}

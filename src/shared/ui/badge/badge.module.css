@@ -1,0 +1,77 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  width: fit-content;
+  white-space: nowrap;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon :global(svg),
+.icon :global(img) {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+/* =======================
+   SOFT APPEARANCE (Default) 
+   ======================= */
+.soft.primary {
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--text-primary) 15%, transparent);
+}
+
+.soft.success-dark {
+  color: var(--text-success-dark);
+  background: color-mix(in srgb, var(--text-success-dark) 15%, transparent);
+}
+
+.soft.success-light {
+  color: var(--text-success-light);
+  background: color-mix(in srgb, var(--text-success-light) 15%, transparent);
+}
+
+.soft.warning {
+  color: var(--text-warning);
+  background: color-mix(in srgb, var(--text-warning) 15%, transparent);
+}
+
+.soft.error {
+  color: var(--text-error);
+  background: color-mix(in srgb, var(--text-error) 15%, transparent);
+}
+
+/* =======================
+   SOLID APPEARANCE 
+   ======================= */
+.solid {
+  color: #ffffff; /* Forces text AND the SVG mask to become perfectly white */
+}
+
+/* For "match_capital", applying a translucent white overlay looks fantastic on dark blue cards */
+.solid.primary {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.solid.success-dark,
+.solid.success-light {
+  background: var(--positive); /* Solid bright green */
+}
+
+.solid.warning {
+  background: var(--text-warning); /* Solid orange */
+}
+
+.solid.error {
+  background: var(--negative); /* Solid red */
+}

@@ -1,0 +1,114 @@
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.active_investments {
+  padding: 24px 0 4px;
+}
+
+.active_investments_list {
+  max-height: calc(100vh - 460px);
+  overflow-y: auto;
+  padding-top: 8px;
+  padding-bottom: 36px;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+}
+
+.active_investments_header {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Card Layout for Investments */
+.investCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  margin-top: var(--space-4);
+  cursor: pointer;
+}
+
+/* Header */
+.investHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.investTitleArea {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.investName {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.investRoi {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.roiValue {
+  color: var(--text-success-dark);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.roiLabel {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-top: -4px; /* Pull it slightly closer to the percentage */
+}
+
+/* Divider */
+.investDivider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+
+/* Body */
+.investBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.investColumns {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: calc(
+    var(--space-3) * -1
+  ); /* Pull progress bars up closer to the headers */
+}
+
+.columnLabel {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+}

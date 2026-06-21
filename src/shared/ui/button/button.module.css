@@ -1,0 +1,105 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md); /* Matches the rounded, pill-like design */
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.08s ease,
+    opacity 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
+/* Sizing */
+.sm {
+  padding: 6px 16px;
+  font-size: 13px;
+}
+
+.md {
+  padding: 12px 24px;
+  font-size: 15px;
+}
+
+.lg {
+  padding: 16px 32px;
+  font-size: 16px;
+}
+
+/* 
+  PRIMARY BUTTON (ex: "ADD NEW INVESTMENT")
+  Solid blue background, white text 
+*/
+.primary {
+  background: var(--button-primary);
+  color: var(--surface);
+  letter-spacing: 0.02em; /* Gives it that clean, spaced-out look */
+}
+.primary:hover {
+  opacity: 0.9;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 
+  SECONDARY BUTTON (ex: "Add Return")
+  Solid white background, blue text
+*/
+.secondary {
+  background: var(--button-secondary); /* Usually white in tokens */
+  color: var(--button-primary);
+}
+.secondary:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* 
+  SECONDARY SOFT BUTTON (ex: "Add Capital")
+  Slightly translucent overlay, blue text
+*/
+.secondary-soft {
+  background: color-mix(in srgb, var(--button-secondary) 85%, transparent);
+  color: var(--primary);
+}
+.secondary-soft:hover {
+  background: var(--button-secondary);
+}
+
+/* 
+  GHOST BUTTON (ex: "Cancel")
+  Transparent background, blue text
+*/
+.ghost {
+  background: transparent;
+  color: var(--button-primary);
+  font-size: 16px;
+}
+.ghost:hover {
+  background: color-mix(in srgb, var(--button-primary) 8%, transparent);
+}
+
+/* 
+  OUTLINE BUTTON 
+*/
+.outline {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text);
+}
+.outline:hover {
+  background: var(--surface-2);
+}
+
+/* Make sure any SVG icons inside buttons scale nicely */
+.button :global(svg) {
+  width: 1.2em;
+  height: 1.2em;
+}

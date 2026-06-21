@@ -1,0 +1,96 @@
+.bannerCard {
+  display: flex;
+  justify-content: space-between;
+  background: var(--primary);
+  color: #ffffff;
+  padding: 32px var(--space-5);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+  border: none;
+}
+
+/* Left Section styles */
+.leftSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  gap: var(--space-2);
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.investName {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.overviewActions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.dotSeparator {
+  opacity: 0.5;
+}
+
+.statusText {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: x-small;
+}
+
+/* Right Section styles */
+.rightSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 400px;
+}
+
+.titles {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Progress bar inside blue banner styling overrides */
+.progressContainer {
+  width: 100%;
+  margin: var(--space-1) 0;
+}
+
+.progressContainer :global(.track) {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Bottom elements metadata */
+.bottomMetaRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.earnedDiff {
+  font-size: 14px;
+}
+
+.roiPercent {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.divider {
+  height: 1px;
+  width: 100%;
+  background-color: var(--text-success-dark);
+}

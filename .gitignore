@@ -82,6 +82,8 @@ out
 .nuxt
 dist
 .output
+dist-ssr
+*.local
 
 # Gatsby files
 .cache/
@@ -141,3 +143,4 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+DS_Store

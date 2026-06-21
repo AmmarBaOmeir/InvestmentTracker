@@ -1,0 +1,42 @@
+.tabsContainer {
+  width: 100%;
+  border-bottom: 1px solid var(--border); /* Full width gray line */
+}
+
+.tabsList {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6); /* Spaces out the tabs perfectly */
+  overflow-x: auto; /* Allows swiping on small screens */
+  scrollbar-width: none; /* Hides scrollbar on Firefox */
+}
+
+/* Hides scrollbar on Chrome/Safari/Edge */
+.tabsList::-webkit-scrollbar {
+  display: none;
+}
+
+.tabItem {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent; /* Transparent border to prevent layout shift */
+  color: var(--text-muted); /* Gray text */
+  font-size: 14px;
+  font-weight: 600;
+  padding: var(--space-3) 4px;
+  margin-bottom: -1px; /* Crucial: Overlaps the container's 1px bottom border */
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.tabItem:hover {
+  color: var(--text); /* Slightly darker on hover */
+}
+
+.tabItem.active {
+  color: var(--button-primary); /* Blue text */
+  border-bottom-color: var(--button-primary); /* Blue underline */
+}

@@ -1,0 +1,46 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.back {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.flip {
+  rotate: 180deg;
+  height: 10px;
+}
+
+[dir="rtl"] .flip {
+  rotate: 0deg;
+}
+
+.flexItems {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-1);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.pointerCursor {
+  cursor: pointer;
+}

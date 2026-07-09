@@ -15,7 +15,7 @@ import type {
 } from "@/entities/asset/model/types";
 import { type BadgeVariant } from "../ui/badge/badge";
 import type { ColumnDef } from "../ui";
-import { formatCurrency } from "../lib";
+import { formatCurrency, formatDisplayDate } from "../lib";
 import styles from "./const.module.css";
 
 export const investmentStatusIconsColors = {
@@ -111,10 +111,19 @@ export function useCapitalColumns(): ColumnDef<CapitalData>[] {
             </div>
             <div>
               <div className={styles.cellMainText}>
-                <span>{item.title}</span>
-                <span className={styles.mutedText}>{item.date}</span>
+                <span>
+                  {i18n.resolvedLanguage === "ar"
+                    ? item.title_ar
+                    : item.title_en}
+                </span>
+                <span className={styles.mutedText}>
+                  {formatDisplayDate(
+                    item.date,
+                    i18n.resolvedLanguage === "ar" ? "ar-SA" : "en-US",
+                  )}
+                </span>
               </div>
-              <span className={styles.mutedText}>{item.note}</span>
+              <span className={styles.mutedText}>{item.note ?? ""}</span>
             </div>
           </div>
         ),
@@ -151,7 +160,7 @@ export function useCapitalColumns(): ColumnDef<CapitalData>[] {
         ),
       },
     ],
-    [t, i18n.resolvedLanguage],
+    [t, i18n],
   );
 }
 
@@ -209,6 +218,6 @@ export function useReturnColumns(): ColumnDef<ReturnData>[] {
         ),
       },
     ],
-    [t, i18n.resolvedLanguage],
+    [t, i18n],
   );
 }

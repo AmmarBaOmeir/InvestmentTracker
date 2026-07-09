@@ -22,10 +22,19 @@ import styles from "./overview-card.module.css";
 
 export interface OverviewCardProps {
   invest: Investment;
+  investmentId: string;
+  investment: Investment;
+  onSuccess?: () => void;
   className?: string;
 }
 
-export function OverviewCard({ invest, className }: OverviewCardProps) {
+export function OverviewCard({
+  invest,
+  investmentId,
+  investment,
+  onSuccess,
+  className,
+}: OverviewCardProps) {
   const { t } = useTranslation();
   const currentLang = i18n.resolvedLanguage ?? i18n.language;
 
@@ -112,7 +121,7 @@ export function OverviewCard({ invest, className }: OverviewCardProps) {
             }
             leftLabel={formatCurrency(invest.total_capital_sa)}
             rightLabel={formatCurrency(invest.total_gained_sa)}
-            centerLabel={formatPercent(progressSar, "never")}
+            centerLabel={formatPercent(progressSar)}
             labelColor={
               invest.status === "inactive" ? "muted" : progressColorSar
             }
@@ -126,7 +135,7 @@ export function OverviewCard({ invest, className }: OverviewCardProps) {
             }
             leftLabel={formatCurrency(invest.total_capital_ye, "YER")}
             rightLabel={formatCurrency(invest.total_gained_ye, "YER")}
-            centerLabel={formatPercent(progressYer, "never")}
+            centerLabel={formatPercent(progressYer)}
             labelColor={
               invest.status === "inactive" ? "muted" : progressColorYer
             }
@@ -146,12 +155,18 @@ export function OverviewCard({ invest, className }: OverviewCardProps) {
         </div>
       </div>
       <AddReturnForm
+        investment={investment}
+        investmentId={investmentId}
         isOpen={isReturnModalOpen}
         onClose={() => setIsReturnModalOpen(false)}
+        onSuccess={onSuccess}
       />
       <AddCapitalForm
+        investment={investment}
+        investmentId={investmentId}
         isOpen={isCapitalModalOpen}
         onClose={() => setIsCapitalModalOpen(false)}
+        onSuccess={onSuccess}
       />
     </Card>
   );

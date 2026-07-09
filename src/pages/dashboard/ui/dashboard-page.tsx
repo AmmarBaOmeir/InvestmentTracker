@@ -1,8 +1,9 @@
 import { SVG } from "@/shared/ui";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useLoaderData, useNavigate, useRevalidator } from "react-router-dom";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import saudiRialIcon from "@/assets/icons/saudi-rial.svg";
+import searchIcon from "@/assets/icons/search.svg";
 import yemeniRialIcon from "@/assets/icons/yemeni-rial.svg";
 import { Badge, Card, ProgressBar, StatCard } from "@/shared/ui";
 import { formatCurrency, formatPercent } from "@/shared/lib";
@@ -17,7 +18,6 @@ import {
 } from "@/shared/helpers/calculation";
 import { TextField } from "@/shared/ui/text-field/text-field";
 import { FilterButton } from "@/features/filter-button";
-import { mockAInvestments } from "@/entities/asset/model/mock";
 import i18n from "@/shared/i18n";
 import {
   investmentStatusIcons,
@@ -28,34 +28,50 @@ import {
   statIcons,
   statTones,
 } from "@/shared/helpers/consts";
+import type { DashboardLoaderData } from "../model/dashboard-loader";
+import {
+  EMPTY_INVESTMENT_FILTERS,
+  filterInvestments,
+  hasActiveInvestmentFilters,
+} from "../model/investment-filters";
 
 export function DashboardPage() {
   const navigate = useNavigate();
   const [isAddInvestmentModalOpen, setIsAddInvestmentModalOpen] =
     useState(false);
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
-  const [isFilterApplied, setIsFilterApplied] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [investmentFilters, setInvestmentFilters] = useState(
+    EMPTY_INVESTMENT_FILTERS,
+  );
+  const {
+    investments,
+    statistics,
+    error: loadError,
+  } = useLoaderData<DashboardLoaderData>();
+  const revalidator = useRevalidator();
+  const isLoadingInvestments = revalidator.state === "loading";
 
   const { t } = useTranslation();
   const current = i18n.resolvedLanguage ?? i18n.language;
 
-  // these totals for statastics that should come from a separate api for assets or statistics
-  const totalCapital = mockAInvestments.reduce(
-    (sum, a) => sum + a.total_capital_sa,
-    0,
+  const filteredInvestments = useMemo(
+    () => filterInvestments(investments, searchQuery, investmentFilters),
+    [investments, searchQuery, investmentFilters],
   );
-  const totalGain = mockAInvestments.reduce(
-    (sum, a) => sum + a.total_gained_sa,
-    0,
-  );
-  const totalYemeniCapital = mockAInvestments.reduce(
-    (sum, a) => sum + a.total_capital_ye,
-    0,
-  );
-  const totalYemeniGain = mockAInvestments.reduce(
-    (sum, a) => sum + a.total_gained_ye,
-    0,
-  );
+
+  const isFilterApplied = hasActiveInvestmentFilters(investmentFilters);
+
+  const loadInvestments = () => {
+    void revalidator.revalidate();
+  };
+
+  const {
+    total_capital_sa: totalCapital,
+    total_gained_sa: totalGain,
+    total_capital_ye: totalYemeniCapital,
+    total_gained_ye: totalYemeniGain,
+  } = statistics;
 
   const valueTone = statTones[isValue1ExceedingValue2(totalGain, totalCapital)];
   const yeValueTone =
@@ -76,6 +92,10 @@ export function DashboardPage() {
 
   const onAddInvestment = () => {
     setIsAddInvestmentModalOpen(true);
+  };
+
+  const resetInvestmentFilters = () => {
+    setInvestmentFilters(EMPTY_INVESTMENT_FILTERS);
   };
 
   return (
@@ -109,11 +129,16 @@ export function DashboardPage() {
       <section className={styles.active_investments}>
         <div className={styles.active_investments_header}>
           <div className={styles.active_investments_header_filter}>
-            <TextField leading={t("common.search")} placeholder="" />
+            <TextField
+              leading={<SVG src={searchIcon} />}
+              placeholder={t("common.search_placeholder")}
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+            />
             <FilterButton
               onClick={onFilterInvestment}
               hasFilter={isFilterApplied}
-              onClear={() => setIsFilterApplied(false)}
+              onClear={resetInvestmentFilters}
             />
           </div>
           <Button variant="primary" size="sm" onClick={onAddInvestment}>
@@ -126,7 +151,29 @@ export function DashboardPage() {
           </Button>
         </div>
         <section className={styles.active_investments_list}>
-          {mockAInvestments.map((invest) => {
+          {isLoadingInvestments ? (
+            <p className={styles.listMessage}>{t("common.loading")}</p>
+          ) : loadError ? (
+            <div className={styles.listError} role="alert">
+              <p>{loadError}</p>
+              <div className={styles.listErrorActions}>
+                <Button
+                  variant="secondary-soft"
+                  size="sm"
+                  onClick={() => void loadInvestments()}
+                >
+                  {t("common.retry")}
+                </Button>
+              </div>
+            </div>
+          ) : investments.length === 0 ? (
+            <p className={styles.listMessage}>
+              {t("dashboard.no_investments")}
+            </p>
+          ) : filteredInvestments.length === 0 ? (
+            <p className={styles.listMessage}>{t("dashboard.no_results")}</p>
+          ) : null}
+          {filteredInvestments.map((invest) => {
             const investName =
               current === "en" ? invest.name_en : invest.name_ar;
             const statusI18n = t(`investment.${invest.status}`);
@@ -209,7 +256,7 @@ export function DashboardPage() {
                     }
                     leftLabel={formatCurrency(invest.total_capital_sa)}
                     rightLabel={formatCurrency(invest.total_gained_sa)}
-                    centerLabel={formatPercent(progressSarAvg, "never")}
+                    centerLabel={formatPercent(progressSarAvg)}
                     labelColor={
                       invest.status === "inactive" ? "muted" : progressColorSar
                     }
@@ -222,7 +269,7 @@ export function DashboardPage() {
                     }
                     leftLabel={formatCurrency(invest.total_capital_ye, "YER")}
                     rightLabel={formatCurrency(invest.total_gained_ye, "YER")}
-                    centerLabel={formatPercent(progressYerAvg, "never")}
+                    centerLabel={formatPercent(progressYerAvg)}
                     labelColor={
                       invest.status === "inactive" ? "muted" : progressColorYer
                     }
@@ -236,12 +283,14 @@ export function DashboardPage() {
       <AddInvestmentForm
         isOpen={isAddInvestmentModalOpen}
         onClose={() => setIsAddInvestmentModalOpen(false)}
+        onSuccess={loadInvestments}
       />
       <FilterInvestmentModal
         isOpen={isFilterModalOpen}
         onClose={() => setIsFilterModalOpen(false)}
-        onApply={() => setIsFilterApplied(true)}
-        onReset={() => setIsFilterApplied(false)}
+        filters={investmentFilters}
+        onApply={setInvestmentFilters}
+        onReset={resetInvestmentFilters}
       />
     </div>
   );

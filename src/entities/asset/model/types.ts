@@ -24,19 +24,23 @@ export interface Investment {
 }
 
 export interface CapitalData {
-  title: string;
+  id: string;
+  title_en: string;
+  title_ar: string;
   date: string;
   total_shares: number;
   amount_sar_per_share: number;
   amount_yer_per_share: number;
-  note: string;
+  note?: string;
 }
 
 export interface ReturnData {
-  title: string;
+  id: string;
+  title_en: string;
+  title_ar: string;
   date: string;
   total_shares: number;
   amount_sar_per_share: number;
   amount_yer_per_share: number;
-  note: string;
+  note?: string;
 }

@@ -1,0 +1,32 @@
+{
+  "errors": {
+    "resource_not_found": "Resource not found",
+    "user_not_found": "User not found",
+    "investment_not_found": "Investment not found",
+    "capital_not_found": "Capital record not found",
+    "return_not_found": "Return record not found",
+    "bad_request": "Invalid request",
+    "conflict": "Request conflicts with existing data",
+    "duplicate_record": "A record with this value already exists",
+    "record_not_found": "Record not found",
+    "invalid_reference": "Invalid reference to a related record",
+    "invalid_data": "The provided data is invalid",
+    "database_error": "A database error occurred",
+    "internal_error": "An internal server error occurred",
+    "server_unavailable": "The server is unavailable. Please try again later.",
+    "network_error": "A network error occurred. Check your connection and try again.",
+    "invalid_response": "Received an invalid response from the server."
+  },
+  "validation": {
+    "validation_failed": "Please correct the highlighted fields",
+    "at_least_one_field": "At least one field must be provided",
+    "invalid_email": "Please enter a valid email address",
+    "name_required": "Name is required",
+    "password_min_length": "Password must be at least 8 characters",
+    "field_required": "This field is required",
+    "invalid_uuid": "Invalid identifier format",
+    "invalid_status": "Invalid investment status",
+    "invalid_number": "Please enter a valid number",
+    "invalid_date": "Please enter a valid date"
+  }
+}

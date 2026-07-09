@@ -12,7 +12,9 @@ export function ThemeToggle() {
     <Button
       variant="ghost"
       onClick={toggleTheme}
-      aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+      aria-label={t(
+        theme === "dark" ? "common.switch_to_light" : "common.switch_to_dark",
+      )}
       title={t(
         theme === "dark" ? "common.switch_to_light" : "common.switch_to_dark",
       )}

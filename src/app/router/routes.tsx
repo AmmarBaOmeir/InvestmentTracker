@@ -1,20 +1,14 @@
-import { lazy } from "react";
-import { Navigate, type RouteObject } from "react-router-dom"; // <-- Add Navigate
+import { Navigate, type RouteObject } from "react-router-dom";
 import { RootLayout } from "@/widgets/root-layout";
 import { RouteError } from "@/app/router/route-error";
 import { paths } from "@/shared/config";
-
-const DashboardPage = lazy(() =>
-  import("@/pages/dashboard").then((m) => ({ default: m.DashboardPage })),
-);
-
-const InvestmentPage = lazy(() =>
-  import("@/pages/investment").then((m) => ({ default: m.InvestmentPage })),
-);
-
-const NotFoundPage = lazy(() =>
-  import("@/pages/not-found").then((m) => ({ default: m.NotFoundPage })),
-);
+import { dashboardLoader } from "@/pages/dashboard";
+import { investmentLoader } from "@/pages/investment";
+import {
+  DashboardPage,
+  InvestmentPage,
+  NotFoundPage,
+} from "@/app/router/lazy-pages";
 
 export const routes: RouteObject[] = [
   {
@@ -26,8 +20,12 @@ export const routes: RouteObject[] = [
     element: <RootLayout />,
     errorElement: <RouteError />,
     children: [
-      { index: true, element: <DashboardPage /> },
-      { path: ":id", element: <InvestmentPage /> },
+      {
+        index: true,
+        element: <DashboardPage />,
+        loader: dashboardLoader,
+      },
+      { path: ":id", element: <InvestmentPage />, loader: investmentLoader },
       { path: "*", element: <NotFoundPage /> },
     ],
   },

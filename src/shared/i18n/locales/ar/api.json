@@ -1,0 +1,32 @@
+{
+  "errors": {
+    "resource_not_found": "المورد غير موجود",
+    "user_not_found": "المستخدم غير موجود",
+    "investment_not_found": "الاستثمار غير موجود",
+    "capital_not_found": "سجل رأس المال غير موجود",
+    "return_not_found": "سجل العائد غير موجود",
+    "bad_request": "طلب غير صالح",
+    "conflict": "الطلب يتعارض مع بيانات موجودة",
+    "duplicate_record": "يوجد سجل بنفس القيمة مسبقاً",
+    "record_not_found": "السجل غير موجود",
+    "invalid_reference": "مرجع غير صالح لسجل مرتبط",
+    "invalid_data": "البيانات المقدمة غير صالحة",
+    "database_error": "حدث خطأ في قاعدة البيانات",
+    "internal_error": "حدث خطأ داخلي في الخادم",
+    "server_unavailable": "الخادم غير متاح. يرجى المحاولة مرة أخرى لاحقاً.",
+    "network_error": "حدث خطأ في الشبكة. تحقق من اتصالك وحاول مرة أخرى.",
+    "invalid_response": "تم استلام استجابة غير صالحة من الخادم."
+  },
+  "validation": {
+    "validation_failed": "يرجى تصحيح الحقول المحددة",
+    "at_least_one_field": "يجب توفير حقل واحد على الأقل",
+    "invalid_email": "يرجى إدخال بريد إلكتروني صالح",
+    "name_required": "الاسم مطلوب",
+    "password_min_length": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
+    "field_required": "هذا الحقل مطلوب",
+    "invalid_uuid": "صيغة المعرّف غير صالحة",
+    "invalid_status": "حالة الاستثمار غير صالحة",
+    "invalid_number": "يرجى إدخال رقم صالح",
+    "invalid_date": "يرجى إدخال تاريخ صالح"
+  }
+}

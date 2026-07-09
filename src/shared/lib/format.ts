@@ -15,3 +15,19 @@ export const formatPercent = (
     maximumFractionDigits: 2,
     signDisplay,
   }).format(value / 100);
+
+export function formatDisplayDate(
+  value: string | Date,
+  locale = "en-US",
+): string {
+  const date =
+    typeof value === "string"
+      ? new Date(value.includes("T") ? value : `${value}T00:00:00`)
+      : value;
+
+  return new Intl.DateTimeFormat(locale, {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  }).format(date);
+}

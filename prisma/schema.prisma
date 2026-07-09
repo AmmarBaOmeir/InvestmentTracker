@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Enums based on your frontend types
+enum InvestmentStatus {
+  in_progress
+  match_capital
+  profitable
+  inactive
+}
+
+
+// Main Investment Entity
+model Investment {
+  id                                   String           @id @default(uuid())
+  name_en                              String
+  name_ar                              String
+  description_en                       String
+  description_ar                       String
+  status                               InvestmentStatus
+  total_capital_sa                     Float
+  total_gained_sa                      Float
+  total_capital_ye                     Float
+  total_gained_ye                      Float
+  total_shares                         Float?
+  capital_amount_per_share_sar         Float
+  capital_amount_per_share_yer         Float
+  expected_return_amount_per_share_sar Float
+  expected_return_amount_per_share_yer Float
+  invested_date                        DateTime
+  
+  // Relations
+  capitals CapitalData[]
+  returns  ReturnData[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Capital Data Entity
+model CapitalData {
+  id                   String        @id @default(uuid())
+  title_en             String
+  title_ar             String
+  date                 DateTime
+  total_shares         Float
+  amount_sar_per_share Float
+  amount_yer_per_share Float
+  note                 String?
+
+  // Relation back to the Investment
+  investmentId         String
+  investment           Investment     @relation(fields: [investmentId], references: [id], onDelete: Cascade)
+
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
+}
+
+// Return Data Entity
+model ReturnData {
+  id                   String         @id @default(uuid())
+  title_en             String
+  title_ar             String
+  date                 DateTime
+  total_shares         Float
+  amount_sar_per_share Float
+  amount_yer_per_share Float
+  note                 String?
+
+  // Relation back to the Investment
+  investmentId         String
+  investment           Investment     @relation(fields: [investmentId], references: [id], onDelete: Cascade)
+
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}

@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/shared/ui";
 import { paths } from "@/shared/config";
 
 export function NotFoundPage() {
+  const { t } = useTranslation();
+
   return (
     <div
       style={{
@@ -12,12 +15,10 @@ export function NotFoundPage() {
         marginTop: "10vh",
       }}
     >
-      <h1 style={{ fontSize: 64 }}>404</h1>
-      <p style={{ color: "var(--text-muted)" }}>
-        This page could not be found.
-      </p>
+      <h1 style={{ fontSize: 64 }}>{t("not_found.title")}</h1>
+      <p style={{ color: "var(--text-muted)" }}>{t("not_found.message")}</p>
       <Link to={paths.dashboard}>
-        <Button>Back to dashboard</Button>
+        <Button>{t("not_found.back_to_dashboard")}</Button>
       </Link>
     </div>
   );

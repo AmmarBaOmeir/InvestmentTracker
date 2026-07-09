@@ -3,8 +3,11 @@ import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import en from "./locales/en/translation.json";
 import ar from "./locales/ar/translation.json";
+import enApi from "./locales/en/api.json";
+import arApi from "./locales/ar/api.json";
 
 export const defaultNS = "translation";
+export const apiNS = "api";
 export const supportedLngs = ["en", "ar"] as const;
 export type AppLanguage = (typeof supportedLngs)[number];
 
@@ -15,8 +18,8 @@ export function getDirection(lng: string): "rtl" | "ltr" {
 }
 
 export const resources = {
-  en: { translation: en },
-  ar: { translation: ar },
+  en: { translation: en, api: enApi },
+  ar: { translation: ar, api: arApi },
 } as const;
 
 i18n

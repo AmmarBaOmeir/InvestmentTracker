@@ -1,4 +1,5 @@
 import { useEffect, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { createPortal } from "react-dom";
 import { cn } from "@/shared/lib";
 import styles from "./modal.module.css";
@@ -20,6 +21,8 @@ export function Modal({
   footer,
   className,
 }: ModalProps) {
+  const { t } = useTranslation();
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -44,7 +47,7 @@ export function Modal({
           <button
             className={styles.closeButton}
             onClick={onClose}
-            aria-label="Close"
+            aria-label={t("common.close")}
           >
             &times;
           </button>

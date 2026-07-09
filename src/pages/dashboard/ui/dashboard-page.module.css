@@ -118,3 +118,21 @@
   color: var(--text-muted);
   font-weight: 600;
 }
+
+.listMessage {
+  color: var(--text-muted);
+  font-size: 14px;
+  padding: var(--space-4) 0;
+}
+
+.listError {
+  color: var(--text-danger, #b42318);
+  font-size: 14px;
+  padding: var(--space-4) 0;
+}
+
+.listErrorActions {
+  display: flex;
+  gap: var(--space-2);
+  padding-bottom: var(--space-2);
+}

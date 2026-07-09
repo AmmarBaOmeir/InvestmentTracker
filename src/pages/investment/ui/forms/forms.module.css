@@ -16,3 +16,52 @@
   gap: var(--space-3);
   margin-top: var(--space-4);
 }
+
+.error {
+  color: var(--danger, #dc2626);
+  font-size: 14px;
+  margin-bottom: var(--space-4);
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+
+.checkboxRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+}
+
+.checkboxRow input {
+  margin-top: 2px;
+  accent-color: var(--primary);
+}
+
+.checkboxLabel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  cursor: pointer;
+}
+
+.checkboxTitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.checkboxHint {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.capitalFields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}

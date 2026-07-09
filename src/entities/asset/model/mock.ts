@@ -8,11 +8,13 @@ import dateIcon from "@/assets/icons/date.svg";
 import fundIcon from "@/assets/icons/fund.svg";
 import type { StatCardProps } from "@/shared/ui/stat-card/stat-card";
 
-export const mockAInvestments: Investment[] = [
+export const mockInvestments: Investment[] = [
   {
     id: "1",
     name_en: "Rental Yard",
     name_ar: "ساحة إيجار",
+    description_en: "Commercial rental yard for vehicle and equipment storage.",
+    description_ar: "ساحة إيجار تجارية لتخزين المركبات والمعدات.",
     invested_date: "1/12/2025",
     status: "in_progress",
     total_capital_sa: 7000,
@@ -29,6 +31,8 @@ export const mockAInvestments: Investment[] = [
     id: "2",
     name_en: "Coffee Shop",
     name_ar: "مقهى",
+    description_en: "Neighborhood coffee shop with steady foot traffic.",
+    description_ar: "مقهى حي يتمتع بإقبال ثابت من الزبائن.",
     invested_date: "1/6/2024",
     status: "match_capital",
     total_capital_sa: 12000,
@@ -45,6 +49,8 @@ export const mockAInvestments: Investment[] = [
     id: "3",
     name_en: "Bus",
     name_ar: "باص",
+    description_en: "Passenger bus operating on intercity routes.",
+    description_ar: "حافلة ركاب تعمل على خطوط بين المدن.",
     invested_date: "1/1/2024",
     status: "inactive",
     total_capital_sa: 54000,
@@ -59,8 +65,10 @@ export const mockAInvestments: Investment[] = [
   },
   {
     id: "4",
-    name_en: "taxi",
+    name_en: "Taxi",
     name_ar: "تاكسي",
+    description_en: "Taxi service fleet serving urban commuters.",
+    description_ar: "أسطول خدمة تاكسي يخدم ركاب المدينة.",
     invested_date: "1/1/2023",
     status: "profitable",
     total_capital_sa: 20000,
@@ -115,91 +123,26 @@ export const mockOverviewStats: (Omit<StatCardProps, "label"> & {
 
 export const mockCapitals: CapitalData[] = [
   {
-    title: "Initial Investment",
+    id: "c1",
+    title_en: "Initial Investment",
+    title_ar: "Initial Investment AR",
     date: "2025-01-15",
     total_shares: 15,
     amount_yer_per_share: 75000,
     amount_sar_per_share: 200,
-    status: "inbound",
     note: "First capital injection for the project",
-  },
-  {
-    title: "Equipment Expansion",
-    date: "2025-04-22",
-    total_shares: 20,
-    amount_yer_per_share: 75000,
-    amount_sar_per_share: 200,
-    status: "pending",
-    note: "Funds allocated for purchasing new servers",
-  },
-  {
-    title: "Marketing Budget",
-    date: "2025-06-10",
-    total_shares: 10,
-    amount_yer_per_share: 75000,
-    amount_sar_per_share: 200,
-    status: "blocked",
-    note: "Held by the bank pending documentation",
-  },
-  {
-    title: "Operational Costs",
-    date: "2025-08-05",
-    total_shares: 6,
-    amount_yer_per_share: 75000,
-    amount_sar_per_share: 200,
-    status: "inbound",
-    note: "Q3 operational expenses and salaries",
-  },
-  {
-    title: "Emergency Fund",
-    date: "2025-11-20",
-    total_shares: 5,
-    amount_yer_per_share: 75000,
-    amount_sar_per_share: 200,
-    status: "pending",
-    note: "Reserve capital for unforeseen expenses",
   },
 ];
 
 export const mockReturns: ReturnData[] = [
   {
-    title: "Q1 Dividend",
+    id: "r1",
+    title_en: "Q1 Dividend",
+    title_ar: "Q1 Dividend AR",
     date: "2025-03-31",
     total_shares: 15,
     amount_yer_per_share: 75000,
     amount_sar_per_share: 200,
     note: "First quarter profit distribution",
-  },
-  {
-    title: "Q2 Dividend",
-    date: "2025-06-30",
-    total_shares: 15,
-    amount_yer_per_share: 75000,
-    amount_sar_per_share: 200,
-    note: "Second quarter profit distribution",
-  },
-  {
-    title: "Asset Sale",
-    date: "2025-08-15",
-    total_shares: 25,
-    amount_yer_per_share: 75000,
-    amount_sar_per_share: 200,
-    note: "Partial sale of obsolete equipment",
-  },
-  {
-    title: "Q3 Dividend",
-    date: "2025-09-30",
-    total_shares: 35,
-    amount_yer_per_share: 75000,
-    amount_sar_per_share: 200,
-    note: "Third quarter profit distribution",
-  },
-  {
-    title: "Annual Bonus",
-    date: "2025-12-20",
-    total_shares: 41,
-    amount_yer_per_share: 75000,
-    amount_sar_per_share: 200,
-    note: "End of year performance bonus",
   },
 ];

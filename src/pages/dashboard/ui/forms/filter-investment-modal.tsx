@@ -5,32 +5,37 @@ import { TextField } from "@/shared/ui/text-field/text-field";
 import { Select } from "@/shared/ui/select/select";
 import { DatePicker } from "@/shared/ui/date-picker/date-picker";
 import styles from "./filter-investment-modal.module.css";
+import {
+  parseInvestmentFilters,
+  type InvestmentFilters,
+} from "../../model/investment-filters";
 
 interface FilterInvestmentModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onApply?: () => void;
-  onReset?: () => void;
+  filters: InvestmentFilters;
+  onApply: (filters: InvestmentFilters) => void;
+  onReset: () => void;
 }
 
 export function FilterInvestmentModal({
   isOpen,
   onClose,
+  filters,
   onApply,
   onReset,
 }: FilterInvestmentModalProps) {
   const { t } = useTranslation();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Apply filters logic here
-    onApply?.();
+    const formData = new FormData(e.currentTarget);
+    onApply(parseInvestmentFilters(formData));
     onClose();
   };
 
   const handleReset = () => {
-    // Reset filters logic here
-    onReset?.();
+    onReset();
     onClose();
   };
 
@@ -52,102 +57,105 @@ export function FilterInvestmentModal({
       footer={
         <>
           <Button type="button" variant="secondary-soft" onClick={handleReset}>
-            {t("common.reset", "Reset")}
+            {t("common.reset")}
           </Button>
           <Button type="submit" variant="primary" form="filter-investment-form">
-            {t("common.apply", "Apply")}
+            {t("common.apply")}
           </Button>
         </>
       }
     >
       <form
+        key={JSON.stringify(filters)}
         id="filter-investment-form"
         className={styles.form}
         onSubmit={handleSubmit}
       >
         <Select
-          label={t("investment.status", "Investment Status")}
+          label={t("investment.status")}
           name="status"
+          defaultValue={filters.status}
         >
-          <option value="">{t("common.all", "All")}</option>
-          <option value="profitable">
-            {t("investment.profitable", "Profitable")}
-          </option>
-          <option value="match_capital">
-            {t("investment.match_capital", "Match Capital")}
-          </option>
-          <option value="in_progress">
-            {t("investment.in_progress", "In Progress")}
-          </option>
-          <option value="inactive">
-            {t("investment.inactive", "Inactive")}
-          </option>
+          <option value="">{t("common.all")}</option>
+          <option value="profitable">{t("investment.profitable")}</option>
+          <option value="match_capital">{t("investment.match_capital")}</option>
+          <option value="in_progress">{t("investment.in_progress")}</option>
+          <option value="inactive">{t("investment.inactive")}</option>
         </Select>
 
         <div className={styles.rangeGroup}>
           <label className={styles.rangeLabel}>
-            {t("investment.total_capital", "Total Capital")}
+            {t("investment.total_capital")}
           </label>
           <div className={styles.rangeInputs}>
             <TextField
               type="number"
               name="capital_min"
-              placeholder={t("common.min", "Min")}
+              placeholder={t("common.min")}
+              defaultValue={filters.capitalMin ?? ""}
             />
             <TextField
               type="number"
               name="capital_max"
-              placeholder={t("common.max", "Max")}
+              placeholder={t("common.max")}
+              defaultValue={filters.capitalMax ?? ""}
             />
           </div>
         </div>
 
         <div className={styles.rangeGroup}>
           <label className={styles.rangeLabel}>
-            {t("investment.total_returned", "Total Returned")}
+            {t("investment.total_returned")}
           </label>
           <div className={styles.rangeInputs}>
             <TextField
               type="number"
               name="returned_min"
-              placeholder={t("common.min", "Min")}
+              placeholder={t("common.min")}
+              defaultValue={filters.returnedMin ?? ""}
             />
             <TextField
               type="number"
               name="returned_max"
-              placeholder={t("common.max", "Max")}
+              placeholder={t("common.max")}
+              defaultValue={filters.returnedMax ?? ""}
             />
           </div>
         </div>
 
         <div className={styles.rangeGroup}>
           <label className={styles.rangeLabel}>
-            {t("investment.total_shares", "Total Shares")}
+            {t("investment.total_shares")}
           </label>
           <div className={styles.rangeInputs}>
             <TextField
               type="number"
               name="shares_min"
-              placeholder={t("common.min", "Min")}
+              placeholder={t("common.min")}
+              defaultValue={filters.sharesMin ?? ""}
             />
             <TextField
               type="number"
               name="shares_max"
-              placeholder={t("common.max", "Max")}
+              placeholder={t("common.max")}
+              defaultValue={filters.sharesMax ?? ""}
             />
           </div>
         </div>
 
         <div className={styles.rangeGroup}>
-          <label className={styles.rangeLabel}>
-            {t("investment.date", "Investment Date")}
-          </label>
+          <label className={styles.rangeLabel}>{t("investment.date")}</label>
           <div className={styles.rangeInputs}>
             <DatePicker
               name="date_from"
-              placeholder={t("common.from", "From")}
+              placeholder={t("common.from")}
+              defaultValue={filters.dateFrom}
             />
-            <DatePicker name="date_to" placeholder={t("common.to", "To")} />
+            <DatePicker
+              name="date_to"
+              placeholder={t("common.to")}
+              defaultValue={filters.dateTo}
+            />
           </div>
         </div>
       </form>

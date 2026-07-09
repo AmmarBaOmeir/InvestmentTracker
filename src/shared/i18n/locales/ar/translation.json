@@ -31,7 +31,13 @@
     "title": "العنوان",
     "to": "إلى",
     "user_snap": "المستخدم",
-    "yearly": "سنوي"
+    "yearly": "سنوي",
+    "saving": "جارٍ الحفظ...",
+    "loading": "جارٍ التحميل...",
+    "request_failed": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+    "retry": "إعادة المحاولة",
+    "close": "إغلاق",
+    "search_placeholder": "بحث..."
   },
   "dashboard": {
     "add_investment": "إضافة استثمار",
@@ -41,7 +47,9 @@
     "total_capital_sa": "إجمالي رأس المال (ريال سعودي)",
     "total_capital_ye": "إجمالي رأس المال (ريال يمني)",
     "total_gained_sa": "إجمالي العائدات (ريال سعودي)",
-    "total_gained_ye": "إجمالي العائدات (ريال يمني)"
+    "total_gained_ye": "إجمالي العائدات (ريال يمني)",
+    "no_investments": "لا توجد استثمارات بعد.",
+    "no_results": "لا توجد نتائج تطابق البحث أو عوامل التصفية."
   },
   "investment": {
     "add_capital": "إضافة رأس مال",
@@ -51,22 +59,22 @@
     "add_return": "إضافة عائد",
     "add_return_desc": "يرجى تعبئة التفاصيل أدناه لإضافة عائد جديد.",
     "amount": "المبلغ",
-    "amount_sa": "المبلغ (ريال سعودي)",
-    "amount_sar": "المبلغ (ريال سعودي)",
+    "amount_sa": "إجمالي المبلغ (ريال سعودي)",
+    "amount_sar": "إجمالي المبلغ (ريال سعودي)",
     "amount_sar_per_share": "مبلغ السهم الواحد (ريال سعودي)",
-    "amount_ye": "المبلغ (ريال يمني)",
-    "amount_yer": "المبلغ (ريال يمني)",
+    "amount_ye": "إجمالي المبلغ (ريال يمني)",
+    "amount_yer": "إجمالي المبلغ (ريال يمني)",
     "amount_yer_per_share": "مبلغ السهم الواحد (ريال يمني)",
     "blocked": "محظور",
-    "capital_amount_per_share_sar": "مبلغ رأس المال للسهم الواحد (ريال سعودي)",
-    "capital_amount_per_share_yer": "مبلغ رأس المال للسهم الواحد (ريال يمني)",
+    "capital_amount_per_share_sar": "رأس المال للسهم الواحد (ريال سعودي)",
+    "capital_amount_per_share_yer": "رأس المال للسهم الواحد (ريال يمني)",
     "capitals": "رأس المال",
     "date": "تاريخ الاستثمار",
     "date_of_funding": "تاريخ التمويل",
     "date_of_return": "تاريخ العائد",
-    "expected_return_amount": "مبلغ العائد المتوقع",
-    "expected_return_amount_per_share_sar": "مبلغ العائد المتوقع للسهم الواحد (ريال سعودي)",
-    "expected_return_amount_per_share_yer": "مبلغ العائد المتوقع للسهم الواحد (ريال يمني)",
+    "expected_return_amount": "العائد المتوقع للسهم الواحد",
+    "expected_return_amount_per_share_sar": "العائد المتوقع للسهم الواحد (ريال سعودي)",
+    "expected_return_amount_per_share_yer": "العائد المتوقع للسهم الواحد (ريال يمني)",
     "filter_investments": "تصفية الاستثمارات",
     "in_progress": "قيد المعالجة",
     "inactive": "غير نشط",
@@ -90,8 +98,24 @@
     "status": "الحالة",
     "title": "العنوان",
     "total_capital": "إجمالي رأس المال",
-    "total_invested": "إجمالي رأس المال",
+    "total_invested": "إجمالي المستثمر",
     "total_returned": "إجمالي العائدات",
-    "total_shares": "إجمالي الأسهم"
+    "total_shares": "إجمالي الأسهم",
+    "include_initial_capital": "تسجيل استثمار أولي",
+    "include_initial_capital_desc": "إنشاء سجل رأس مال بالمبالغ أدناه"
+  },
+  "errors": {
+    "title": "حدث خطأ ما",
+    "unexpected": "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.",
+    "back_to_dashboard": "العودة إلى لوحة التحكم",
+    "http_error": "{{status}} {{statusText}}"
+  },
+  "login": {
+    "title": "تسجيل الدخول"
+  },
+  "not_found": {
+    "title": "404",
+    "message": "تعذّر العثور على هذه الصفحة.",
+    "back_to_dashboard": "العودة إلى لوحة التحكم"
   }
 }

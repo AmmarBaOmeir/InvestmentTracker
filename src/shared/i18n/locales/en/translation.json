@@ -31,7 +31,13 @@
     "title": "Title",
     "to": "To",
     "user_snap": "User Snap",
-    "yearly": "Yearly"
+    "yearly": "Yearly",
+    "saving": "Saving...",
+    "loading": "Loading...",
+    "request_failed": "Something went wrong. Please try again.",
+    "retry": "Retry",
+    "close": "Close",
+    "search_placeholder": "Search..."
   },
   "dashboard": {
     "add_investment": "Add Investment",
@@ -41,7 +47,9 @@
     "total_capital_sa": "Total Capital (SAR)",
     "total_capital_ye": "Total Capital (YER)",
     "total_gained_sa": "Total Gained (SAR)",
-    "total_gained_ye": "Total Gained (YER)"
+    "total_gained_ye": "Total Gained (YER)",
+    "no_investments": "No investments yet.",
+    "no_results": "No investments match your search or filters."
   },
   "investment": {
     "add_capital": "Add Capital",
@@ -51,22 +59,22 @@
     "add_return": "Add Return",
     "add_return_desc": "Please fill in the details below to add a new return.",
     "amount": "Amount",
-    "amount_sa": "Amount (SAR)",
-    "amount_sar": "Amount (SAR)",
-    "amount_sar_per_share": "Amount (SAR) of one share",
-    "amount_ye": "Amount (YER)",
-    "amount_yer": "Amount (YER)",
-    "amount_yer_per_share": "Amount (YER) of one share",
+    "amount_sa": "Total amount (SAR)",
+    "amount_sar": "Total amount (SAR)",
+    "amount_sar_per_share": "Amount per share (SAR)",
+    "amount_ye": "Total amount (YER)",
+    "amount_yer": "Total amount (YER)",
+    "amount_yer_per_share": "Amount per share (YER)",
     "blocked": "Blocked",
-    "capital_amount_per_share_sar": "Capital amount per share (SAR)",
-    "capital_amount_per_share_yer": "Capital amount per share (YER)",
+    "capital_amount_per_share_sar": "Capital per share (SAR)",
+    "capital_amount_per_share_yer": "Capital per share (YER)",
     "capitals": "Capitals",
     "date": "Investment Date",
     "date_of_funding": "Date of funding",
-    "date_of_return": "Date of income return",
-    "expected_return_amount": "Expected Return Amount",
-    "expected_return_amount_per_share_sar": "Expected return amount per share (SAR)",
-    "expected_return_amount_per_share_yer": "Expected return amount per share (YER)",
+    "date_of_return": "Return date",
+    "expected_return_amount": "Expected return per share",
+    "expected_return_amount_per_share_sar": "Expected return per share (SAR)",
+    "expected_return_amount_per_share_yer": "Expected return per share (YER)",
     "filter_investments": "Filter Investments",
     "in_progress": "In Progress",
     "inactive": "Inactive",
@@ -92,6 +100,22 @@
     "total_capital": "Total Capital",
     "total_invested": "Total Invested",
     "total_returned": "Total Returned",
-    "total_shares": "Total Shares"
+    "total_shares": "Total Shares",
+    "include_initial_capital": "Record initial investment",
+    "include_initial_capital_desc": "Create a capital entry with the amounts below"
+  },
+  "errors": {
+    "title": "Something went wrong",
+    "unexpected": "An unexpected error occurred. Please try again.",
+    "back_to_dashboard": "Back to dashboard",
+    "http_error": "{{status}} {{statusText}}"
+  },
+  "login": {
+    "title": "Login"
+  },
+  "not_found": {
+    "title": "404",
+    "message": "This page could not be found.",
+    "back_to_dashboard": "Back to dashboard"
   }
 }

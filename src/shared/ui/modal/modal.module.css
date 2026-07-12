@@ -11,7 +11,12 @@
   z-index: 1000;
   padding: var(--space-4);
 }
-
+.overlayEnter {
+  animation: fadeIn var(--motion-duration-normal) var(--motion-ease-out) both;
+}
+.overlayExit {
+  animation: fadeOut var(--motion-duration-normal) var(--motion-ease-in) both;
+}
 .modal {
   background: var(--surface);
   border-radius: var(--radius-md);
@@ -21,20 +26,14 @@
   display: flex;
   flex-direction: column;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  animation: slideUp 0.2s ease-out;
 }
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.modalEnter {
+  animation: slideUp var(--motion-duration-normal) var(--motion-ease-out) both;
 }
-
+.modalExit {
+  animation: slideUpExit var(--motion-duration-normal) var(--motion-ease-in)
+    both;
+}
 .header {
   display: flex;
   align-items: center;
@@ -42,7 +41,6 @@
   padding: var(--space-4) var(--space-5);
   border-bottom: 1px solid var(--border);
 }
-
 .title {
   font-size: 18px;
   font-weight: 600;
@@ -52,7 +50,6 @@
   align-items: center;
   gap: var(--space-2);
 }
-
 .closeButton {
   background: transparent;
   border: none;
@@ -64,19 +61,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.2s;
+  transition:
+    color var(--motion-duration-fast) var(--motion-ease-standard),
+    transform var(--motion-duration-fast) var(--motion-ease-spring);
 }
-
 .closeButton:hover {
   color: var(--text);
+  transform: scale(1.08) rotate(90deg);
 }
-
 .body {
   padding: var(--space-5);
   overflow-y: auto;
   flex: 1;
 }
-
 .footer {
   padding: var(--space-4) var(--space-5);
   border-top: 1px solid var(--border);

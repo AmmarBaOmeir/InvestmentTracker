@@ -1,4 +1,5 @@
 .badge {
+  animation: popIn var(--motion-duration-normal) var(--motion-ease-out) both;
   display: inline-flex;
   align-items: center;
   gap: var(--space-1);

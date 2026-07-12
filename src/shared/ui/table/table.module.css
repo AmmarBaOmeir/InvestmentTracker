@@ -70,11 +70,40 @@
 }
 
 .tr {
-  transition: background 0.15s ease;
+  transition:
+    background var(--motion-duration-fast),
+    transform var(--motion-duration-fast) var(--motion-ease-standard);
   border-bottom: 1px solid var(--border);
   display: table;
   width: 100%;
   table-layout: fixed;
+}
+
+.tbody .tr {
+  animation: rowEnter var(--motion-duration-normal) var(--motion-ease-out) both;
+}
+
+.tbody .tr:nth-child(1) {
+  animation-delay: 0ms;
+}
+.tbody .tr:nth-child(2) {
+  animation-delay: 40ms;
+}
+.tbody .tr:nth-child(3) {
+  animation-delay: 80ms;
+}
+.tbody .tr:nth-child(4) {
+  animation-delay: 120ms;
+}
+.tbody .tr:nth-child(5) {
+  animation-delay: 160ms;
+}
+.tbody .tr:nth-child(n + 6) {
+  animation-delay: 200ms;
+}
+
+.tr:hover {
+  background: var(--surface-2);
 }
 
 .tr:last-child {

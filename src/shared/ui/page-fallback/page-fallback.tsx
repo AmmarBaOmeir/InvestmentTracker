@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { Spinner } from "@/shared/ui/spinner/spinner";
 import styles from "./page-fallback.module.css";
 
 export function PageFallback() {
@@ -6,7 +7,7 @@ export function PageFallback() {
 
   return (
     <div className={styles.wrap} role="status" aria-live="polite">
-      <span className={styles.spinner} />
+      <Spinner />
       <span>{t("common.loading")}</span>
     </div>
   );

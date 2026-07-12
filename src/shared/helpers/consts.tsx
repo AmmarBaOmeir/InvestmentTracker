@@ -186,7 +186,11 @@ export function useReturnColumns(): ColumnDef<ReturnData>[] {
             </div>
             <div>
               <div className={styles.cellMainText}>
-                <span>{item.title}</span>
+                <span>
+                  {i18n.resolvedLanguage === "ar"
+                    ? item.title_ar
+                    : item.title_en}
+                </span>
                 <span className={styles.mutedText}>{item.date}</span>
               </div>
               <span className={styles.mutedText}>{item.note}</span>

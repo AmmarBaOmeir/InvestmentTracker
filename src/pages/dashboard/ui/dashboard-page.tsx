@@ -5,8 +5,13 @@ import { useTranslation } from "react-i18next";
 import saudiRialIcon from "@/assets/icons/saudi-rial.svg";
 import searchIcon from "@/assets/icons/search.svg";
 import yemeniRialIcon from "@/assets/icons/yemeni-rial.svg";
-import { Badge, Card, ProgressBar, StatCard } from "@/shared/ui";
-import { formatCurrency, formatPercent } from "@/shared/lib";
+import { Badge, Card, ProgressBar, Spinner, StatCard } from "@/shared/ui";
+import {
+  cn,
+  formatCurrency,
+  formatPercent,
+  useRouteNavigation,
+} from "@/shared/lib";
 import styles from "./dashboard-page.module.css";
 import { Button } from "@/shared/ui";
 import plusIcon from "@/assets/icons/plus.svg";
@@ -34,9 +39,11 @@ import {
   filterInvestments,
   hasActiveInvestmentFilters,
 } from "../model/investment-filters";
+import { paths } from "@/shared/config";
 
 export function DashboardPage() {
   const navigate = useNavigate();
+  const { isNavigating, isNavigatingTo } = useRouteNavigation();
   const [isAddInvestmentModalOpen, setIsAddInvestmentModalOpen] =
     useState(false);
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
@@ -208,9 +215,23 @@ export function DashboardPage() {
             return (
               <Card
                 key={invest.id}
-                className={styles.investCard}
-                onClick={() => navigate(`/dashboard/${invest.id}`)}
+                className={cn(
+                  styles.investCard,
+                  isNavigating && styles.investCardDisabled,
+                  isNavigatingTo(paths.investment(invest.id)) &&
+                    styles.investCardLoading,
+                )}
+                onClick={() => {
+                  if (isNavigating) return;
+                  navigate(paths.investment(invest.id));
+                }}
               >
+                {isNavigatingTo(paths.investment(invest.id)) && (
+                  <div className={styles.cardLoader}>
+                    <Spinner />
+                    <span>{t("common.loading")}</span>
+                  </div>
+                )}
                 {/* Header Area */}
                 <div className={styles.investHeader}>
                   <div className={styles.investTitleArea}>

@@ -9,16 +9,16 @@
   background: var(--surface);
   color: var(--text);
   transition:
-    border-color 0.2s,
-    box-shadow 0.2s;
+    border-color var(--motion-duration-fast),
+    box-shadow var(--motion-duration-fast),
+    transform var(--motion-duration-fast) var(--motion-ease-standard);
+  transform-origin: left center;
 }
-
-/* Highlight the whole wrapper when the input is focused */
 .wrapper:focus-within {
   border-color: var(--accent);
   box-shadow: 0 0 0 2px var(--accent-soft);
+  transform: scale(1.01);
 }
-
 .leading {
   display: inline-flex;
   align-items: center;
@@ -27,14 +27,11 @@
   flex-shrink: 0;
   font-size: 14px;
 }
-
-/* Automatically size any SVG icons passed into the leading prop */
 .leading :global(svg) {
   width: 16px;
   height: 16px;
   display: block;
 }
-
 .input {
   flex: 1;
   min-width: 0;
@@ -46,33 +43,39 @@
   outline: none;
   padding: 0;
 }
-
 .input::placeholder {
   color: var(--text-muted);
 }
-
+.input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.65;
+  transition:
+    opacity var(--motion-duration-fast),
+    filter var(--motion-duration-fast);
+}
+.wrapper:focus-within .input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  filter: invert(42%) sepia(93%) saturate(1352%) hue-rotate(213deg)
+    brightness(97%) contrast(94%);
+}
 .container {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
 }
-
 .label {
   font-size: 14px;
   font-weight: 500;
   color: var(--text);
 }
-
 .readOnly {
   background: var(--surface-hover, #f5f5f5);
   opacity: 0.8;
   cursor: not-allowed;
 }
-
 .readOnly .input {
   cursor: not-allowed;
 }
-
 :global([data-theme="dark"]) .readOnly {
   background: var(--surface-hover, #2a2a2a);
 }

@@ -44,3 +44,14 @@
 .pointerCursor {
   cursor: pointer;
 }
+
+.homeActionDisabled {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.homeActionLoading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}

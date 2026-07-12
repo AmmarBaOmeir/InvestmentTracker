@@ -15,3 +15,4 @@ export {
   ApiRequestError,
   resolveRequestError,
 } from "@/shared/lib/api-client";
+export { useRouteNavigation } from "@/shared/lib/use-route-navigation";

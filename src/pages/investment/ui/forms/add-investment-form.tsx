@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Modal, SVG } from "@/shared/ui";
+import { Button, Checkbox, Modal, SVG } from "@/shared/ui";
 import investmentIcon from "@/assets/icons/investment.svg";
 import { TextField } from "@/shared/ui/text-field/text-field";
 import { Textarea } from "@/shared/ui/textarea/textarea";
@@ -10,7 +10,7 @@ import {
   buildCreateInvestmentPayload,
   createInvestment,
 } from "@/entities/asset/api/investments";
-import { resolveRequestError } from "@/shared/lib";
+import { cn, resolveRequestError } from "@/shared/lib";
 import styles from "./forms.module.css";
 
 interface AddInvestmentModalProps {
@@ -165,91 +165,94 @@ export function AddInvestmentForm({
         />
 
         <div className={styles.checkboxRow}>
-          <input
+          <Checkbox
             id="include-initial-capital"
-            type="checkbox"
             checked={includeInitialCapital}
             onChange={(event) => setIncludeInitialCapital(event.target.checked)}
             disabled={isSubmitting}
+            title={t("investment.include_initial_capital")}
+            hint={t("investment.include_initial_capital_desc")}
+            labelClassName={styles.checkboxLabel}
           />
-          <label
-            htmlFor="include-initial-capital"
-            className={styles.checkboxLabel}
-          >
-            <span className={styles.checkboxTitle}>
-              {t("investment.include_initial_capital")}
-            </span>
-            <span className={styles.checkboxHint}>
-              {t("investment.include_initial_capital_desc")}
-            </span>
-          </label>
         </div>
 
-        {includeInitialCapital ? (
+        <div
+          className={cn(
+            styles.capitalFieldsShell,
+            !includeInitialCapital && styles.capitalFieldsCollapsed,
+          )}
+          aria-hidden={!includeInitialCapital}
+        >
           <div className={styles.capitalFields}>
-        <TextField
-          label={t("investment.total_shares")}
-          name="total_shares"
-          type="number"
-          step="any"
-          required
-          placeholder="0"
-          value={totalShares}
-          onChange={(e) =>
-            setTotalShares(e.target.value ? Number(e.target.value) : "")
-          }
-          disabled={isSubmitting}
-        />
+            <TextField
+              label={t("investment.total_shares")}
+              name="total_shares"
+              type="number"
+              step="any"
+              required={includeInitialCapital}
+              placeholder="0"
+              value={totalShares}
+              onChange={(e) =>
+                setTotalShares(e.target.value ? Number(e.target.value) : "")
+              }
+              disabled={isSubmitting || !includeInitialCapital}
+            />
 
-        <TextField
-          label={t("investment.capital_amount_per_share_sar")}
-          name="amount_sar_per_share"
-          type="number"
-          step="any"
-          required
-          placeholder="0.00"
-          value={amountSarPerShare}
-          onChange={(e) =>
-            setAmountSarPerShare(e.target.value ? Number(e.target.value) : "")
-          }
-          disabled={isSubmitting}
-        />
+            <TextField
+              label={t("investment.capital_amount_per_share_sar")}
+              name="amount_sar_per_share"
+              type="number"
+              step="any"
+              required={includeInitialCapital}
+              placeholder="0.00"
+              value={amountSarPerShare}
+              onChange={(e) =>
+                setAmountSarPerShare(
+                  e.target.value ? Number(e.target.value) : "",
+                )
+              }
+              disabled={isSubmitting || !includeInitialCapital}
+            />
 
-        <TextField
-          label={t("investment.capital_amount_per_share_yer")}
-          name="amount_yer_per_share"
-          type="number"
-          step="any"
-          required
-          placeholder="0.00"
-          value={amountYerPerShare}
-          onChange={(e) =>
-            setAmountYerPerShare(e.target.value ? Number(e.target.value) : "")
-          }
-          disabled={isSubmitting}
-        />
+            <TextField
+              label={t("investment.capital_amount_per_share_yer")}
+              name="amount_yer_per_share"
+              type="number"
+              step="any"
+              required={includeInitialCapital}
+              placeholder="0.00"
+              value={amountYerPerShare}
+              onChange={(e) =>
+                setAmountYerPerShare(
+                  e.target.value ? Number(e.target.value) : "",
+                )
+              }
+              disabled={isSubmitting || !includeInitialCapital}
+            />
 
-        <TextField
-          label={t("investment.amount_sar")}
-          name="amount_sar"
-          type="number"
-          step="any"
-          readOnly
-          value={amountSar || ""}
-          placeholder="0.00"
-        />
+            <TextField
+              label={t("investment.amount_sar")}
+              name="amount_sar"
+              type="number"
+              step="any"
+              readOnly
+              value={amountSar || ""}
+              placeholder="0.00"
+              disabled={!includeInitialCapital}
+            />
 
-        <TextField
-          label={t("investment.amount_yer")}
-          name="amount_yer"
-          type="number"
-          step="any"
-          readOnly
-          value={amountYer || ""}
-          placeholder="0.00"
-        />
+            <TextField
+              label={t("investment.amount_yer")}
+              name="amount_yer"
+              type="number"
+              step="any"
+              readOnly
+              value={amountYer || ""}
+              placeholder="0.00"
+              disabled={!includeInitialCapital}
+            />
           </div>
-        ) : null}
+        </div>
 
         <Select
           label={t("investment.return_type")}

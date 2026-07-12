@@ -9,23 +9,20 @@
   margin-bottom: var(--space-4);
   line-height: 1.5;
 }
-
 .actions {
   display: flex;
   justify-content: flex-end;
   gap: var(--space-3);
   margin-top: var(--space-4);
 }
-
 .error {
   color: var(--danger, #dc2626);
   font-size: 14px;
   margin-bottom: var(--space-4);
   line-height: 1.5;
   white-space: pre-line;
+  animation: shake var(--motion-duration-normal) var(--motion-ease-standard);
 }
-
-
 .checkboxRow {
   display: flex;
   align-items: flex-start;
@@ -34,34 +31,50 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   background: var(--surface-2);
+  transition:
+    transform var(--motion-duration-fast) var(--motion-ease-standard),
+    border-color var(--motion-duration-fast),
+    background var(--motion-duration-fast);
 }
-
-.checkboxRow input {
-  margin-top: 2px;
-  accent-color: var(--primary);
+.checkboxRow:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
 }
-
+.checkboxRow:active {
+  transform: translateY(0) scale(0.995);
+}
 .checkboxLabel {
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
   cursor: pointer;
 }
-
-.checkboxTitle {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text);
+.capitalFieldsShell {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows var(--motion-duration-normal)
+    var(--motion-ease-out);
+  overflow: hidden;
 }
 
-.checkboxHint {
-  font-size: 13px;
-  color: var(--text-muted);
-  line-height: 1.4;
+.capitalFieldsCollapsed {
+  grid-template-rows: 0fr;
 }
 
 .capitalFields {
+  min-height: 0;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity var(--motion-duration-normal) var(--motion-ease-out),
+    transform var(--motion-duration-normal) var(--motion-ease-out);
+}
+
+.capitalFieldsCollapsed .capitalFields {
+  opacity: 0;
+  transform: translateY(-8px);
 }

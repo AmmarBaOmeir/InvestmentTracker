@@ -1,8 +1,11 @@
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { createPortal } from "react-dom";
 import { cn } from "@/shared/lib";
 import styles from "./modal.module.css";
+
+// Keep in sync with --motion-duration-normal in animations.css
+const ANIMATION_DURATION = 220;
 
 export interface ModalProps {
   isOpen: boolean;
@@ -22,9 +25,31 @@ export function Modal({
   className,
 }: ModalProps) {
   const { t } = useTranslation();
+  const [shouldRender, setShouldRender] = useState(isOpen);
+  const [isClosing, setIsClosing] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
+      setShouldRender(true);
+      setIsClosing(false);
+      return;
+    }
+
+    if (!shouldRender) {
+      return;
+    }
+
+    setIsClosing(true);
+    const timeoutId = window.setTimeout(() => {
+      setShouldRender(false);
+      setIsClosing(false);
+    }, ANIMATION_DURATION);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [isOpen, shouldRender]);
+
+  useEffect(() => {
+    if (shouldRender) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -32,14 +57,24 @@ export function Modal({
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isOpen]);
+  }, [shouldRender]);
 
-  if (!isOpen) return null;
+  if (!shouldRender) return null;
 
   return createPortal(
-    <div className={styles.overlay} onClick={onClose}>
+    <div
+      className={cn(
+        styles.overlay,
+        isClosing ? styles.overlayExit : styles.overlayEnter,
+      )}
+      onClick={onClose}
+    >
       <div
-        className={cn(styles.modal, className)}
+        className={cn(
+          styles.modal,
+          isClosing ? styles.modalExit : styles.modalEnter,
+          className,
+        )}
         onClick={(e) => e.stopPropagation()}
       >
         <div className={styles.header}>

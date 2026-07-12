@@ -7,14 +7,14 @@ import { resolveRequestError } from "@/shared/lib";
 import type { LoaderFunctionArgs } from "react-router-dom";
 import {
   buildOverviewStats,
-  type InvestmentOverviewStatItem,
+  type InvestmentOverviewStatGroup,
 } from "@/pages/investment/model/overview-stats";
 
 export type InvestmentLoaderData = {
   investment: Investment | null;
   capitals: CapitalData[];
   returns: ReturnData[];
-  overviewStats: InvestmentOverviewStatItem[];
+  overviewStats: InvestmentOverviewStatGroup[];
   error: string | null;
 };
 

@@ -2,6 +2,7 @@
   display: inline-block;
   width: var(--svg-size);
   height: var(--svg-size);
+  --svg-color: var(--primary);
   background-color: var(--svg-color);
 
   /* Webkit Prefix for Chrome/Safari/Edge */

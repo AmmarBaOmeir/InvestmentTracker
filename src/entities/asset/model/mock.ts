@@ -6,6 +6,7 @@ import type {
 } from "@/entities/asset/model/types";
 import dateIcon from "@/assets/icons/date.svg";
 import fundIcon from "@/assets/icons/fund.svg";
+import saudiRialIcon from "@/assets/icons/saudi-rial.svg";
 import type { StatCardProps } from "@/shared/ui/stat-card/stat-card";
 
 export const mockInvestments: Investment[] = [
@@ -103,10 +104,10 @@ export const mockOverviewStats: (Omit<StatCardProps, "label"> & {
     icon: dateIcon,
   },
   {
-    label: "investment.overview_stats.expected_return",
+    label: "investment.overview_stats.expected_return_per_share_sar",
     value: 10000,
     currency: "SAR",
-    icon: fundIcon,
+    icon: saudiRialIcon,
   },
   {
     label: "investment.overview_stats.last_return_date",
@@ -114,10 +115,10 @@ export const mockOverviewStats: (Omit<StatCardProps, "label"> & {
     icon: dateIcon,
   },
   {
-    label: "investment.overview_stats.last_return_amount",
+    label: "investment.overview_stats.last_return_amount_sar",
     value: 1200,
     currency: "SAR",
-    icon: fundIcon,
+    icon: saudiRialIcon,
   },
 ] as const;
 

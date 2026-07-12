@@ -12,7 +12,7 @@ export interface SVGProps extends HTMLAttributes<HTMLSpanElement> {
 
 export function SVG({
   src,
-  fill = "var(--primary)",
+  fill,
   size = "1em",
   alt,
   title,
@@ -30,7 +30,7 @@ export function SVG({
       style={
         {
           "--svg-size": typeof size === "number" ? size + "px" : size,
-          "--svg-color": fill,
+          ...(fill !== undefined ? { "--svg-color": fill } : {}),
           "--svg-url": 'url("' + src + '")',
           ...style,
         } as CSSProperties

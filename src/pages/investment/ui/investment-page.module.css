@@ -5,6 +5,108 @@
 }
 
 .overviewPage {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-height: calc(100vh - 450px);
+  overflow-y: scroll;
+  padding-top: var(--space-5);
+  padding-bottom: var(--space-6);
+}
+
+.tableBody,
+.overviewPage {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+}
+
+.overviewGroup:not(:last-child)::after {
+  content: "";
+  display: block;
+  height: 1px;
+  margin: var(--space-5) 0;
+  background-color: var(--border);
+}
+
+.overviewGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.overviewGroupHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: inherit;
+  --group-header-accent: var(--text-muted);
+}
+
+.overviewGroupHeader:hover {
+  --group-header-accent: var(--primary);
+}
+
+.overviewGroupTitleContent {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.overviewGroupTitle {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--group-header-accent);
+  transition: color var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.overviewGroupIcon {
+  --svg-color: var(--group-header-accent);
+  transition:
+    background-color var(--motion-duration-fast) var(--motion-ease-standard),
+    rotate var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.overviewGroupArrow {
+  rotate: 90deg;
+}
+
+.overviewGroupArrowCollapsed {
+  rotate: -90deg;
+}
+
+.overviewGroupCardsShell {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows var(--motion-duration-normal)
+    var(--motion-ease-out);
+  overflow: hidden;
+}
+
+.overviewGroupCardsCollapsed {
+  grid-template-rows: 0fr;
+}
+
+.overviewGroupCards {
+  min-height: 0;
+  overflow: hidden;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
@@ -13,6 +115,8 @@
 .tableBody {
   max-height: calc(100vh - 550px);
   overflow-y: scroll;
+  padding-top: 8px;
+  padding-bottom: 36px;
 }
 
 .returnsTableBody {

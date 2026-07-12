@@ -30,6 +30,7 @@
 .labelText {
   min-width: 0;
   font-size: small;
+  color: var(--text-muted);
 }
 
 .value {

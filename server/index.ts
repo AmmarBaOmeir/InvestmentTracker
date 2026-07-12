@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "../env/load-env.js";
 import { serve } from "@hono/node-server";
 import app from "./app.js";
 import { connectPrisma } from "./lib/prisma.js";

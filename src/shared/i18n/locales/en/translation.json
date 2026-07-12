@@ -84,11 +84,22 @@
     "note": "Note",
     "overview": "Overview",
     "overview_stats": {
-      "expected_return": "Expected Return",
+      "groups": {
+        "general": "General",
+        "injections": "Injections",
+        "returns": "Returns"
+      },
+      "expected_return_per_share_sar": "Expected Return per Share (SAR)",
+      "expected_return_per_share_yer": "Expected Return per Share (YER)",
+      "last_injected_amount_sar": "Last Injected Amount (SAR)",
+      "last_injected_amount_yer": "Last Injected Amount (YER)",
       "last_injection_date": "Last Injection Date",
-      "last_return_amount": "Last Return Amount",
+      "last_return_amount_sar": "Last Return Amount (SAR)",
+      "last_return_amount_yer": "Last Return Amount (YER)",
       "last_return_date": "Last Return Date",
-      "start_date": "Start Date"
+      "start_date": "Start Date",
+      "total_expected_return_sar": "Total Expected Return (SAR)",
+      "total_expected_return_yer": "Total Expected Return (YER)"
     },
     "pending": "Pending",
     "profitable": "Profitable",

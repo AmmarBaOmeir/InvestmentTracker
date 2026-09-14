@@ -15,3 +15,4 @@ export { Textarea } from "./textarea/textarea";
 export { Select } from "./select/select";
 export { DatePicker } from "./date-picker/date-picker";
 export { Checkbox } from "./checkbox/checkbox";
+export { EmptyState, type EmptyStateProps } from "@/shared/ui/empty-state";

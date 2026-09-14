@@ -2,9 +2,10 @@ import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { AddReturnForm } from "../forms/add-return-form";
-import { Button, Table, TextField } from "@/shared/ui";
+import { Button, EmptyState, Table, TextField } from "@/shared/ui";
 import { SVG } from "@/shared/ui/svg/svg";
 import plusIcon from "@/assets/icons/plus.svg";
+import increaseIcon from "@/assets/icons/increase.svg";
 import searchIcon from "@/assets/icons/search.svg";
 
 import type { Investment, ReturnData } from "@/entities/asset/model/types";
@@ -45,40 +46,50 @@ export function InvestmentReturnsPage({
 
   return (
     <div className={styles.page}>
-      <Table<ReturnData>
-        data={filteredReturns}
-        columns={returnColumns}
-        keyExtractor={(item) => item.id}
-        bodyCss={cn(styles.tableBody, styles.returnsTableBody)}
-        header={{
-          search: (
-            <div className={styles.header}>
-              <TextField
-                leading={<SVG src={searchIcon} />}
-                placeholder={t("common.search_placeholder")}
-                value={searchQuery}
-                onChange={(event) => setSearchQuery(event.target.value)}
-              />
+      {returns.length === 0 ? (
+        <EmptyState icon={increaseIcon} message={t("investment.no_returns")} />
+      ) : filteredReturns.length === 0 ? (
+        <EmptyState icon={searchIcon} message={t("dashboard.no_results")} />
+      ) : (
+        <Table<ReturnData>
+          data={filteredReturns}
+          columns={returnColumns}
+          keyExtractor={(item) => item.id}
+          bodyCss={cn(styles.tableBody, styles.returnsTableBody)}
+          header={{
+            search: (
+              <div className={styles.header}>
+                <TextField
+                  leading={<SVG src={searchIcon} />}
+                  placeholder={t("common.search_placeholder")}
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                />
+              </div>
+            ),
+          }}
+          footer={
+            <div className={styles.footer}>
+              <span className={sharedStyles.mutedText}>
+                {filteredReturns.length} {t("common.record")}
+              </span>
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={() => setIsOpen(true)}
+              >
+                <SVG
+                  src={plusIcon}
+                  fill="var(--surface)"
+                  alt={t("investment.add_return")}
+                />
+                {t("investment.add_return")}
+              </Button>
+              <span />
             </div>
-          ),
-        }}
-        footer={
-          <div className={styles.footer}>
-            <span className={sharedStyles.mutedText}>
-              {filteredReturns.length} {t("common.record")}
-            </span>
-            <Button variant="primary" size="sm" onClick={() => setIsOpen(true)}>
-              <SVG
-                src={plusIcon}
-                fill="var(--surface)"
-                alt={t("investment.add_return")}
-              />
-              {t("investment.add_return")}
-            </Button>
-            <span />
-          </div>
-        }
-      />
+          }
+        />
+      )}
       <AddReturnForm
         investment={investment}
         investmentId={investmentId}

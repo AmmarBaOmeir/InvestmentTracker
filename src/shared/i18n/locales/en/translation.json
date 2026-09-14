@@ -113,7 +113,9 @@
     "total_returned": "Total Returned",
     "total_shares": "Total Shares",
     "include_initial_capital": "Record initial investment",
-    "include_initial_capital_desc": "Create a capital entry with the amounts below"
+    "include_initial_capital_desc": "Create a capital entry with the amounts below",
+    "no_capitals": "No capital injections yet.",
+    "no_returns": "No returns recorded yet."
   },
   "errors": {
     "title": "Something went wrong",
@@ -122,7 +124,17 @@
     "http_error": "{{status}} {{statusText}}"
   },
   "login": {
-    "title": "Login"
+    "title": "Sign in",
+    "subtitle": "Enter your credentials to continue",
+    "username": "Username",
+    "username_placeholder": "admin",
+    "password": "Password",
+    "password_placeholder": "Your password",
+    "submit": "Sign in",
+    "submitting": "Signing in...",
+    "invalid_credentials": "Invalid username or password",
+    "logout": "Log out",
+    "current_user": "Current user: {{name}}"
   },
   "not_found": {
     "title": "404",

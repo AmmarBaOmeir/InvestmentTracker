@@ -1,5 +1,8 @@
 import { lazy } from "react";
 
+export const LoginPage = lazy(() =>
+  import("@/pages/login").then((m) => ({ default: m.LoginPage })),
+);
 export const DashboardPage = lazy(() =>
   import("@/pages/dashboard").then((m) => ({ default: m.DashboardPage })),
 );

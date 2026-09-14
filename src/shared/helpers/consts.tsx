@@ -143,13 +143,17 @@ export function useCapitalColumns(): ColumnDef<CapitalData>[] {
         align: i18n.resolvedLanguage === "en" ? "right" : "left",
         render: (item) => (
           <div className={styles.amounts}>
-            <span>
-              {formatCurrency(
-                item.total_shares * item.amount_yer_per_share,
-                "YER",
-              )}
-            </span>
-            <div className={styles.divider} />
+            {item.amount_yer_per_share > 0 && (
+              <>
+                <span>
+                  {formatCurrency(
+                    item.total_shares * item.amount_yer_per_share,
+                    "YER",
+                  )}
+                </span>
+                <div className={styles.divider} />
+              </>
+            )}
             <span>
               {formatCurrency(
                 item.total_shares * item.amount_sar_per_share,
@@ -205,13 +209,17 @@ export function useReturnColumns(): ColumnDef<ReturnData>[] {
         align: i18n.resolvedLanguage === "en" ? "right" : "left",
         render: (item) => (
           <div className={styles.amounts}>
-            <span>
-              {formatCurrency(
-                item.total_shares * item.amount_yer_per_share,
-                "YER",
-              )}
-            </span>
-            <div className={styles.divider} />
+            {item.amount_yer_per_share > 0 && (
+              <>
+                <span>
+                  {formatCurrency(
+                    item.total_shares * item.amount_yer_per_share,
+                    "YER",
+                  )}
+                </span>
+                <div className={styles.divider} />
+              </>
+            )}
             <span>
               {formatCurrency(
                 item.total_shares * item.amount_sar_per_share,

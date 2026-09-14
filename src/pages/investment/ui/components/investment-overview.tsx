@@ -127,20 +127,23 @@ export function OverviewCard({
             }
           />
         </div>
-        <div className={styles.progressContainer}>
-          <ProgressBar
-            value={progressYer}
-            progressColor={
-              invest.status === "inactive" ? "muted" : progressColorYer
-            }
-            leftLabel={formatCurrency(invest.total_capital_ye, "YER")}
-            rightLabel={formatCurrency(invest.total_gained_ye, "YER")}
-            centerLabel={formatPercent(progressYer)}
-            labelColor={
-              invest.status === "inactive" ? "muted" : progressColorYer
-            }
-          />
-        </div>
+        {invest.total_capital_ye === 0 &&
+        invest.total_capital_sa !== 0 ? null : (
+          <div className={styles.progressContainer}>
+            <ProgressBar
+              value={progressYer}
+              progressColor={
+                invest.status === "inactive" ? "muted" : progressColorYer
+              }
+              leftLabel={formatCurrency(invest.total_capital_ye, "YER")}
+              rightLabel={formatCurrency(invest.total_gained_ye, "YER")}
+              centerLabel={formatPercent(progressYer)}
+              labelColor={
+                invest.status === "inactive" ? "muted" : progressColorYer
+              }
+            />
+          </div>
+        )}
 
         {/* Bottom Metadata Row */}
         <div className={styles.bottomMetaRow}>

@@ -1,11 +1,19 @@
-import { SVG } from "@/shared/ui";
 import { useLoaderData, useNavigate, useRevalidator } from "react-router-dom";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import saudiRialIcon from "@/assets/icons/saudi-rial.svg";
+import investmentIcon from "@/assets/icons/investment.svg";
 import searchIcon from "@/assets/icons/search.svg";
 import yemeniRialIcon from "@/assets/icons/yemeni-rial.svg";
-import { Badge, Card, ProgressBar, Spinner, StatCard } from "@/shared/ui";
+import {
+  EmptyState,
+  Badge,
+  Card,
+  ProgressBar,
+  Spinner,
+  StatCard,
+  SVG,
+} from "@/shared/ui";
 import {
   cn,
   formatCurrency,
@@ -174,11 +182,12 @@ export function DashboardPage() {
               </div>
             </div>
           ) : investments.length === 0 ? (
-            <p className={styles.listMessage}>
-              {t("dashboard.no_investments")}
-            </p>
+            <EmptyState
+              icon={investmentIcon}
+              message={t("dashboard.no_investments")}
+            />
           ) : filteredInvestments.length === 0 ? (
-            <p className={styles.listMessage}>{t("dashboard.no_results")}</p>
+            <EmptyState icon={searchIcon} message={t("dashboard.no_results")} />
           ) : null}
           {filteredInvestments.map((invest) => {
             const investName =
@@ -283,18 +292,25 @@ export function DashboardPage() {
                     }
                   />
                   {/* Yemeni Rial Progress */}
-                  <ProgressBar
-                    value={progressYerAvg}
-                    progressColor={
-                      invest.status === "inactive" ? "muted" : progressColorYer
-                    }
-                    leftLabel={formatCurrency(invest.total_capital_ye, "YER")}
-                    rightLabel={formatCurrency(invest.total_gained_ye, "YER")}
-                    centerLabel={formatPercent(progressYerAvg)}
-                    labelColor={
-                      invest.status === "inactive" ? "muted" : progressColorYer
-                    }
-                  />
+                  {invest.total_capital_ye === 0 &&
+                  invest.total_capital_sa !== 0 ? null : (
+                    <ProgressBar
+                      value={progressYerAvg}
+                      progressColor={
+                        invest.status === "inactive"
+                          ? "muted"
+                          : progressColorYer
+                      }
+                      leftLabel={formatCurrency(invest.total_capital_ye, "YER")}
+                      rightLabel={formatCurrency(invest.total_gained_ye, "YER")}
+                      centerLabel={formatPercent(progressYerAvg)}
+                      labelColor={
+                        invest.status === "inactive"
+                          ? "muted"
+                          : progressColorYer
+                      }
+                    />
+                  )}
                 </div>
               </Card>
             );

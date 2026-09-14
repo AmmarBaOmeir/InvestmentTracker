@@ -76,7 +76,7 @@
     "expected_return_amount_per_share_sar": "العائد المتوقع للسهم الواحد (ريال سعودي)",
     "expected_return_amount_per_share_yer": "العائد المتوقع للسهم الواحد (ريال يمني)",
     "filter_investments": "تصفية الاستثمارات",
-    "in_progress": "قيد المعالجة",
+    "in_progress": "نشط",
     "inactive": "غير نشط",
     "inbound": "وارد",
     "info": "المعلومات",
@@ -113,7 +113,9 @@
     "total_returned": "إجمالي العائدات",
     "total_shares": "إجمالي الأسهم",
     "include_initial_capital": "تسجيل استثمار أولي",
-    "include_initial_capital_desc": "إنشاء سجل رأس مال بالمبالغ أدناه"
+    "include_initial_capital_desc": "إنشاء سجل رأس مال بالمبالغ أدناه",
+    "no_capitals": "لا توجد إضافات رأس مال بعد.",
+    "no_returns": "لا توجد عوائد مسجلة بعد."
   },
   "errors": {
     "title": "حدث خطأ ما",
@@ -122,7 +124,17 @@
     "http_error": "{{status}} {{statusText}}"
   },
   "login": {
-    "title": "تسجيل الدخول"
+    "title": "تسجيل الدخول",
+    "subtitle": "أدخل بيانات الدخول للمتابعة",
+    "username": "اسم المستخدم",
+    "username_placeholder": "admin",
+    "password": "كلمة المرور",
+    "password_placeholder": "أدخل كلمة المرور",
+    "submit": "تسجيل الدخول",
+    "submitting": "جارٍ تسجيل الدخول...",
+    "invalid_credentials": "اسم المستخدم أو كلمة المرور غير صحيحة",
+    "logout": "تسجيل الخروج",
+    "current_user": "المستخدم الحالي: {{name}}"
   },
   "not_found": {
     "title": "404",

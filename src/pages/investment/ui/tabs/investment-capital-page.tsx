@@ -2,9 +2,10 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { AddCapitalForm } from "../forms/add-capital-form";
-import { Button, Table } from "@/shared/ui";
+import { Button, EmptyState, Table } from "@/shared/ui";
 import { SVG } from "@/shared/ui/svg/svg";
 import plusIcon from "@/assets/icons/plus.svg";
+import walletIcon from "@/assets/icons/wallet.svg";
 import type { CapitalData, Investment } from "@/entities/asset/model/types";
 import { useCapitalColumns } from "@/shared/helpers/consts";
 
@@ -26,30 +27,42 @@ export function InvestmentCapitalPage({
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 
+  const addCapitalButton = (
+    <Button variant="primary" size="sm" onClick={() => setIsOpen(true)}>
+      <SVG
+        src={plusIcon}
+        fill="var(--surface)"
+        alt={t("investment.add_capital")}
+      />
+      {t("investment.add_capital")}
+    </Button>
+  );
+
   return (
     <div className={styles.page}>
-      <Table<CapitalData>
-        data={capitals}
-        columns={capitalColumns}
-        keyExtractor={(item) => item.id}
-        bodyCss={styles.tableBody}
-        footer={
-          <div className={styles.footer}>
-            <span className={sharedStyles.mutedText}>
-              {capitals.length} {t("common.record")}
-            </span>
-            <Button variant="primary" size="sm" onClick={() => setIsOpen(true)}>
-              <SVG
-                src={plusIcon}
-                fill="var(--surface)"
-                alt={t("investment.add_capital")}
-              />
-              {t("investment.add_capital")}
-            </Button>
-            <span />
-          </div>
-        }
-      />
+      {capitals.length === 0 ? (
+        <EmptyState
+          icon={walletIcon}
+          message={t("investment.no_capitals")}
+          action={addCapitalButton}
+        />
+      ) : (
+        <Table<CapitalData>
+          data={capitals}
+          columns={capitalColumns}
+          keyExtractor={(item) => item.id}
+          bodyCss={styles.tableBody}
+          footer={
+            <div className={styles.footer}>
+              <span className={sharedStyles.mutedText}>
+                {capitals.length} {t("common.record")}
+              </span>
+              {addCapitalButton}
+              <span />
+            </div>
+          }
+        />
+      )}
       <AddCapitalForm
         investment={investment}
         investmentId={investmentId}

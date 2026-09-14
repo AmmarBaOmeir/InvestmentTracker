@@ -57,6 +57,17 @@ function amountStatPair(
   sarValue: number,
   yerValue: number,
 ): InvestmentOverviewStatItem[] {
+  if (yerValue === 0 && sarValue > 0) {
+    return [
+      {
+        id: `${id}.sar`,
+        label: sarLabel,
+        value: sarValue,
+        currency: "SAR",
+        icon: saudiRialIcon,
+      },
+    ];
+  }
   return [
     {
       id: `${id}.yer`,

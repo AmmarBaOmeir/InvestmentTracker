@@ -93,16 +93,18 @@ export const updateCapitalDataSchema = createCapitalDataSchema
     message: ApiMessageKey.validation.at_least_one_field,
   });
 
-export const createReturnDataSchema = z.object({
-  title_en: requiredString,
-  title_ar: requiredString,
-  date: dateField,
-  total_shares: numberField,
-  amount_sar_per_share: numberField,
-  amount_yer_per_share: numberField,
-  note: z.string().optional().nullable(),
-  investmentId: z.string().uuid({ message: ApiMessageKey.validation.invalid_uuid }),
-});
+export const createReturnDataSchema = z
+  .object({
+    title_en: requiredString,
+    title_ar: requiredString,
+    date: dateField,
+    total_shares: numberField,
+    amount_sar_per_share: numberField,
+    amount_yer_per_share: numberField,
+    note: z.string().optional().nullable(),
+    investmentId: z.string().uuid({ message: ApiMessageKey.validation.invalid_uuid }),
+  })
+  .strip();
 
 export const updateReturnDataSchema = createReturnDataSchema
   .omit({ investmentId: true })

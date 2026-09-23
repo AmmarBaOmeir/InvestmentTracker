@@ -3,6 +3,7 @@ import type { AppVariables } from '../types/context.js';
 import { AppError, handlePrismaError, notFound } from '../lib/errors.js';
 import { ApiMessageKey } from '../lib/message-keys.js';
 import { validationError } from '../lib/validation-error.js';
+import { recalculateInvestmentShares } from '../lib/investment-shares.js';
 import { createCapitalDataSchema, updateCapitalDataSchema } from '../lib/validation.js';
 
 const capitals = new Hono<{ Variables: AppVariables }>();
@@ -52,7 +53,11 @@ capitals.post('/', async (c) => {
       throw notFound(ApiMessageKey.errors.investment_not_found, 'INVESTMENT_NOT_FOUND');
     }
 
-    const capital = await prisma.capitalData.create({ data: parsed.data });
+    const capital = await prisma.$transaction(async (tx) => {
+      const created = await tx.capitalData.create({ data: parsed.data });
+      await recalculateInvestmentShares(tx, parsed.data.investmentId);
+      return created;
+    });
     return c.json({ success: true, data: capital }, 201);
   } catch (error) {
     if (error instanceof AppError) throw error;
@@ -73,9 +78,13 @@ capitals.patch('/:id', async (c) => {
       throw notFound(ApiMessageKey.errors.capital_not_found, 'CAPITAL_NOT_FOUND');
     }
 
-    const capital = await prisma.capitalData.update({
-      where: { id },
-      data: parsed.data,
+    const capital = await prisma.$transaction(async (tx) => {
+      const updated = await tx.capitalData.update({
+        where: { id },
+        data: parsed.data,
+      });
+      await recalculateInvestmentShares(tx, existing.investmentId);
+      return updated;
     });
     return c.json({ success: true, data: capital });
   } catch (error) {
@@ -92,7 +101,10 @@ capitals.delete('/:id', async (c) => {
     if (!existing) {
       throw notFound(ApiMessageKey.errors.capital_not_found, 'CAPITAL_NOT_FOUND');
     }
-    await prisma.capitalData.delete({ where: { id } });
+    await prisma.$transaction(async (tx) => {
+      await tx.capitalData.delete({ where: { id } });
+      await recalculateInvestmentShares(tx, existing.investmentId);
+    });
     return c.json({ success: true, data: null });
   } catch (error) {
     if (error instanceof AppError) throw error;

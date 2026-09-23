@@ -1,19 +1,21 @@
 import { type HTMLAttributes, type ReactNode } from "react";
 import { cn } from "@/shared/lib";
+import {
+  getProgressBarFillClass,
+  getProgressBarLabelClass,
+  getProgressBarTooltip,
+  getProgressBarVisualWidth,
+  type TextColorVariant,
+} from "./progress-bar-variant";
 import styles from "./progress-bar.module.css";
 
-export type TextColorVariant =
-  | "default"
-  | "muted"
-  | "primary"
-  | "success-dark"
-  | "success-light"
-  | "warning"
-  | "error";
+export type { TextColorVariant } from "./progress-bar-variant";
 
 export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
   value: number;
+  /** Optional override for inactive or custom states. */
   progressColor?: TextColorVariant;
+  /** Optional override; defaults to a value-matched label color. */
   labelColor?: TextColorVariant;
   leftLabel?: ReactNode;
   centerLabel?: ReactNode;
@@ -22,35 +24,41 @@ export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
 
 export function ProgressBar({
   value,
-  progressColor = "primary",
-  labelColor = "default",
+  progressColor,
+  labelColor,
   leftLabel,
   centerLabel,
   rightLabel,
   className,
   ...props
 }: ProgressBarProps) {
-  // Ensure the value stays between 0 and 100
-  const visualWidth = Math.min(100, Math.max(0, value));
-
-  const hasLabels = leftLabel || centerLabel || rightLabel;
+  const visualWidth = getProgressBarVisualWidth(value);
+  const fillClass = progressColor
+    ? styles[`bg-${progressColor}`]
+    : getProgressBarFillClass(value);
+  const labelClass = labelColor
+    ? styles[`text-${labelColor}`]
+    : getProgressBarLabelClass(value);
+  const hasLabels = Boolean(leftLabel || centerLabel || rightLabel);
 
   return (
     <div className={cn(styles.wrapper, className)} {...props}>
       {hasLabels && (
-        <div className={cn(styles.labels, styles[`text-${labelColor}`])}>
+        <div className={cn(styles.labels, labelClass)}>
           <span className={styles.leftLabel}>{leftLabel}</span>
           <span className={styles.centerLabel}>{centerLabel}</span>
           <span className={styles.rightLabel}>{rightLabel}</span>
         </div>
       )}
 
-      {/* The progress track (background) */}
-      <div className={styles.track}>
-        {/* The progress fill */}
+      <div className={styles.track} title={getProgressBarTooltip(value)}>
         <div
-          className={cn(styles.fill, styles[`bg-${progressColor}`])}
+          className={cn(styles.fill, fillClass)}
           style={{ width: `${visualWidth}%` }}
+          role="progressbar"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={visualWidth}
         />
       </div>
     </div>

@@ -3,6 +3,7 @@ import type { AppVariables } from '../types/context.js';
 import { AppError, handlePrismaError, notFound } from '../lib/errors.js';
 import { ApiMessageKey } from '../lib/message-keys.js';
 import { validationError } from '../lib/validation-error.js';
+import { recalculateInvestmentShares } from '../lib/investment-shares.js';
 import { createInvestmentSchema, updateInvestmentSchema } from '../lib/validation.js';
 
 const investments = new Hono<{ Variables: AppVariables }>();
@@ -22,7 +23,10 @@ investments.get('/:id', async (c) => {
     const prisma = c.get('prisma');
     const investment = await prisma.investment.findUnique({
       where: { id: c.req.param('id') },
-      include: { capitals: true, returns: true },
+      include: {
+        capitals: { orderBy: { date: 'desc' } },
+        returns: { orderBy: { date: 'desc' } },
+      },
     });
     if (!investment) {
       throw notFound(ApiMessageKey.errors.investment_not_found, 'INVESTMENT_NOT_FOUND');
@@ -64,6 +68,7 @@ investments.post('/', async (c) => {
             investmentId: created.id,
           },
         });
+        await recalculateInvestmentShares(tx, created.id);
       }
 
       return created;

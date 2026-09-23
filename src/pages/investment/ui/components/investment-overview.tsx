@@ -10,12 +10,8 @@ import plusIcon from "@/assets/icons/plus.svg";
 import {
   darkInvestmentStatusIcons,
   investmentStatusVariants,
-  lightProgressColors,
 } from "@/shared/helpers/consts";
-import {
-  calculateProgressPercentage,
-  isValue1ExceedingValue2,
-} from "@/shared/helpers/calculation";
+import { calculateProgressPercentage } from "@/shared/helpers/calculation";
 import { formatCurrency, formatPercent } from "@/shared/lib";
 import i18n from "@/shared/i18n";
 import styles from "./overview-card.module.css";
@@ -53,15 +49,6 @@ export function OverviewCard({
     invest.total_capital_ye,
     invest.total_gained_ye,
   );
-  const progressColorYer =
-    lightProgressColors[
-      isValue1ExceedingValue2(invest.total_gained_ye, invest.total_capital_ye)
-    ];
-  const progressColorSar =
-    lightProgressColors[
-      isValue1ExceedingValue2(invest.total_gained_sa, invest.total_capital_sa)
-    ];
-
   const roiValue =
     invest.total_capital_sa > 0
       ? (invest.total_gained_sa / invest.total_capital_sa) * 100
@@ -116,15 +103,11 @@ export function OverviewCard({
         <div className={styles.progressContainer}>
           <ProgressBar
             value={progressSar}
-            progressColor={
-              invest.status === "inactive" ? "muted" : progressColorSar
-            }
+            progressColor={invest.status === "inactive" ? "muted" : undefined}
+            labelColor={invest.status === "inactive" ? "muted" : undefined}
             leftLabel={formatCurrency(invest.total_capital_sa)}
             rightLabel={formatCurrency(invest.total_gained_sa)}
             centerLabel={formatPercent(progressSar)}
-            labelColor={
-              invest.status === "inactive" ? "muted" : progressColorSar
-            }
           />
         </div>
         {invest.total_capital_ye === 0 &&
@@ -132,15 +115,11 @@ export function OverviewCard({
           <div className={styles.progressContainer}>
             <ProgressBar
               value={progressYer}
-              progressColor={
-                invest.status === "inactive" ? "muted" : progressColorYer
-              }
+              progressColor={invest.status === "inactive" ? "muted" : undefined}
+              labelColor={invest.status === "inactive" ? "muted" : undefined}
               leftLabel={formatCurrency(invest.total_capital_ye, "YER")}
               rightLabel={formatCurrency(invest.total_gained_ye, "YER")}
               centerLabel={formatPercent(progressYer)}
-              labelColor={
-                invest.status === "inactive" ? "muted" : progressColorYer
-              }
             />
           </div>
         )}

@@ -115,7 +115,8 @@
     "include_initial_capital": "تسجيل استثمار أولي",
     "include_initial_capital_desc": "إنشاء سجل رأس مال بالمبالغ أدناه",
     "no_capitals": "لا توجد إضافات رأس مال بعد.",
-    "no_returns": "لا توجد عوائد مسجلة بعد."
+    "no_returns": "لا توجد عوائد مسجلة بعد.",
+    "shares_from_investment_hint": "يُحسب تلقائياً من إجمالي أسهم الاستثمار الحالي."
   },
   "errors": {
     "title": "حدث خطأ ما",

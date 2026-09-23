@@ -95,10 +95,7 @@ export function buildOverviewStats(
   const firstCapital = earliestByDate(capitals);
   const lastCapital = latestByDate(capitals);
   const lastReturn = latestByDate(returns);
-  const totalShares = capitals.reduce(
-    (sum, capital) => sum + capital.total_shares,
-    0,
-  );
+  const totalShares = investment.total_shares ?? 0;
   const expectedReturnPerShareSar =
     investment.expected_return_amount_per_share_sar;
   const expectedReturnPerShareYer =

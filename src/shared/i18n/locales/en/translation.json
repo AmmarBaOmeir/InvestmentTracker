@@ -115,7 +115,8 @@
     "include_initial_capital": "Record initial investment",
     "include_initial_capital_desc": "Create a capital entry with the amounts below",
     "no_capitals": "No capital injections yet.",
-    "no_returns": "No returns recorded yet."
+    "no_returns": "No returns recorded yet.",
+    "shares_from_investment_hint": "Auto-calculated from the investment's current total shares."
   },
   "errors": {
     "title": "Something went wrong",

@@ -67,18 +67,6 @@ export const statIconColor = {
   "-1": "var(--text-warning)",
 } as const;
 
-export const progressColors = {
-  1: "success-dark",
-  0: "primary",
-  "-1": "warning",
-} as const;
-
-export const lightProgressColors = {
-  1: "success-light",
-  0: "default",
-  "-1": "warning",
-} as const;
-
 export function useInvestmentTabs() {
   const { t } = useTranslation();
   return useMemo(
@@ -177,7 +165,7 @@ export function useReturnColumns(): ColumnDef<ReturnData>[] {
       {
         key: "info",
         header: t("investment.info"),
-        width: "calc(60vw - 35px)",
+        width: "calc(50vw - 35px)",
         align: i18n.dir() === "ltr" ? "left" : "right",
         render: (item) => (
           <div className={styles.investmentInfoCell}>
@@ -203,9 +191,17 @@ export function useReturnColumns(): ColumnDef<ReturnData>[] {
         ),
       },
       {
+        key: "shares",
+        header: t("investment.total_shares"),
+        width: "calc(20vw - 25px)",
+        render: (item) => {
+          return <span>{item.total_shares}</span>;
+        },
+      },
+      {
         key: "amounts",
         header: t("investment.amount"),
-        width: "calc(40vw - 35px)",
+        width: "calc(30vw - 35px)",
         align: i18n.resolvedLanguage === "en" ? "right" : "left",
         render: (item) => (
           <div className={styles.amounts}>

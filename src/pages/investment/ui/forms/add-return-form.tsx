@@ -1,4 +1,4 @@
-import { useState, createElement } from "react";
+import { useEffect, useState, createElement } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Modal, SVG } from "@/shared/ui";
 import increaseIcon from "@/assets/icons/increase.svg";
@@ -6,6 +6,10 @@ import { TextField } from "@/shared/ui/text-field/text-field";
 import { Textarea } from "@/shared/ui/textarea/textarea";
 import { DatePicker } from "@/shared/ui/date-picker/date-picker";
 import type { Investment } from "@/entities/asset/model/types";
+import {
+  fetchInvestmentDetail,
+  invalidateInvestmentDetailCache,
+} from "@/entities/asset/api/investments";
 import {
   addReturnToInvestment,
   buildCreateReturnPayload,
@@ -29,26 +33,56 @@ export function AddReturnForm({
   onSuccess,
 }: AddReturnModalProps) {
   const { t } = useTranslation();
-  const [totalShares, setTotalShares] = useState<number | "">("");
+  const [displayShares, setDisplayShares] = useState<number | null>(null);
   const [amountSarPerShare, setAmountSarPerShare] = useState<number | "">("");
   const [amountYerPerShare, setAmountYerPerShare] = useState<number | "">("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoadingShares, setIsLoadingShares] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const amountSar =
-    (Number(totalShares) || 0) * (Number(amountSarPerShare) || 0);
-  const amountYer =
-    (Number(totalShares) || 0) * (Number(amountYerPerShare) || 0);
+  const totalShares = displayShares ?? 0;
+  const amountSar = totalShares * (Number(amountSarPerShare) || 0);
+  const amountYer = totalShares * (Number(amountYerPerShare) || 0);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    let cancelled = false;
+    setIsLoadingShares(true);
+    setErrorMessage(null);
+
+    invalidateInvestmentDetailCache(investmentId);
+    fetchInvestmentDetail(investmentId)
+      .then(({ investment: latest }) => {
+        if (cancelled) return;
+        setDisplayShares(latest.total_shares ?? 0);
+      })
+      .catch((error) => {
+        if (cancelled) return;
+        setDisplayShares(investment.total_shares ?? 0);
+        setErrorMessage(resolveRequestError(error));
+      })
+      .finally(() => {
+        if (!cancelled) setIsLoadingShares(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isOpen, investmentId, investment.total_shares]);
+
   function resetForm() {
-    setTotalShares("");
+    setDisplayShares(null);
     setAmountSarPerShare("");
     setAmountYerPerShare("");
     setErrorMessage(null);
   }
+
   function handleClose() {
     if (isSubmitting) return;
     resetForm();
     onClose();
   }
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setErrorMessage(null);
@@ -68,6 +102,7 @@ export function AddReturnForm({
       setIsSubmitting(false);
     }
   }
+
   const layoutClassName = styles.form;
   const fields = (
     <>
@@ -96,18 +131,19 @@ export function AddReturnForm({
         required
         disabled={isSubmitting}
       />
-      <TextField
-        label={t("investment.total_shares")}
-        name="total_shares"
-        type="number"
-        step="any"
-        required
-        value={totalShares}
-        onChange={(e) =>
-          setTotalShares(e.target.value ? Number(e.target.value) : "")
-        }
-        disabled={isSubmitting}
-      />
+      <div>
+        <input type="hidden" name="total_shares" value={totalShares} />
+        <TextField
+          label={t("investment.total_shares")}
+          type="number"
+          readOnly
+          disabled
+          value={isLoadingShares ? "" : totalShares}
+        />
+        <p className={styles.description}>
+          {t("investment.shares_from_investment_hint")}
+        </p>
+      </div>
       <TextField
         label={t("investment.amount_sar_per_share")}
         name="amount_sar_per_share"
@@ -155,7 +191,11 @@ export function AddReturnForm({
         >
           {t("common.cancel")}
         </Button>
-        <Button type="submit" variant="primary" disabled={isSubmitting}>
+        <Button
+          type="submit"
+          variant="primary"
+          disabled={isSubmitting || isLoadingShares}
+        >
           {isSubmitting ? t("common.saving") : t("common.save")}
         </Button>
       </div>

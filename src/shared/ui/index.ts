@@ -4,6 +4,20 @@ export { Card } from "@/shared/ui/card/card";
 export { PageFallback } from "@/shared/ui/page-fallback/page-fallback";
 export { Spinner } from "@/shared/ui/spinner/spinner";
 export { ProgressBar } from "@/shared/ui/progress-bar/progress-bar";
+export type {
+  ProgressBarProps,
+  TextColorVariant,
+} from "@/shared/ui/progress-bar/progress-bar";
+export {
+  PROGRESS_COLOR_THRESHOLDS,
+  getProgressBarFillClass,
+  getProgressBarLabelClass,
+  getProgressBarTooltip,
+  getProgressBarValueVariant,
+  getProgressBarVisualWidth,
+  normalizeProgressValue,
+} from "@/shared/ui/progress-bar/progress-bar-variant";
+export type { ProgressBarValueVariant } from "@/shared/ui/progress-bar/progress-bar-variant";
 export { StatCard } from "@/shared/ui/stat-card/stat-card";
 export { TextField } from "@/shared/ui/text-field/text-field";
 export { Tabs } from "@/shared/ui/tabs/tabs";

@@ -36,7 +36,6 @@ import {
   investmentStatusIcons,
   investmentStatusIconsColors,
   investmentStatusVariants,
-  progressColors,
   statIconColor,
   statIcons,
   statTones,
@@ -193,20 +192,6 @@ export function DashboardPage() {
             const investName =
               current === "en" ? invest.name_en : invest.name_ar;
             const statusI18n = t(`investment.${invest.status}`);
-            const progressColorYer =
-              progressColors[
-                isValue1ExceedingValue2(
-                  invest.total_gained_ye,
-                  invest.total_capital_ye,
-                )
-              ];
-            const progressColorSar =
-              progressColors[
-                isValue1ExceedingValue2(
-                  invest.total_gained_sa,
-                  invest.total_capital_sa,
-                )
-              ];
             const progressSarAvg = calculateProgressPercentage(
               invest.total_capital_sa,
               invest.total_gained_sa,
@@ -282,14 +267,14 @@ export function DashboardPage() {
                   <ProgressBar
                     value={progressSarAvg}
                     progressColor={
-                      invest.status === "inactive" ? "muted" : progressColorSar
+                      invest.status === "inactive" ? "muted" : undefined
+                    }
+                    labelColor={
+                      invest.status === "inactive" ? "muted" : undefined
                     }
                     leftLabel={formatCurrency(invest.total_capital_sa)}
                     rightLabel={formatCurrency(invest.total_gained_sa)}
                     centerLabel={formatPercent(progressSarAvg)}
-                    labelColor={
-                      invest.status === "inactive" ? "muted" : progressColorSar
-                    }
                   />
                   {/* Yemeni Rial Progress */}
                   {invest.total_capital_ye === 0 &&
@@ -297,18 +282,14 @@ export function DashboardPage() {
                     <ProgressBar
                       value={progressYerAvg}
                       progressColor={
-                        invest.status === "inactive"
-                          ? "muted"
-                          : progressColorYer
+                        invest.status === "inactive" ? "muted" : undefined
+                      }
+                      labelColor={
+                        invest.status === "inactive" ? "muted" : undefined
                       }
                       leftLabel={formatCurrency(invest.total_capital_ye, "YER")}
                       rightLabel={formatCurrency(invest.total_gained_ye, "YER")}
                       centerLabel={formatPercent(progressYerAvg)}
-                      labelColor={
-                        invest.status === "inactive"
-                          ? "muted"
-                          : progressColorYer
-                      }
                     />
                   )}
                 </div>
